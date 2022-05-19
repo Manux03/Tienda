@@ -20,22 +20,22 @@ class ProductoView(View):
             producto=list(Producto.objects.filter(idProducto=id).values())
             if len(producto) > 0:
                 producto = producto[0]
-                datos={'message':"Exito", 'usuarios: ': producto }
+                datos={'message':"Producto existente", 'productos: ': producto }
             else:
-                datos={'message':"No hay usuarios"}   
+                datos={'message':"No hay productos"}   
             return JsonResponse(datos)
         else:
             producto=list(Producto.objects.values())
             if len(producto)>0:
-                datos={'message':"Exito", 'usuarios: ': producto }
+                datos={'message':"Producto existente", 'productos: ': producto }
             else:
-                datos={'message':"No hay usuarios"}   
+                datos={'message':"No hay productos"}
             return JsonResponse(datos)
 
 
     def post(self, request):
         jd=json.loads(request.body)
-        Producto.objects.create(idProducto=jd['idProducto'])
+        Producto.objects.create(idProducto=jd['idProducto'],nombreProducto=jd['nombreProducto'],precio=jd['precio'],stock=jd['stock'],marca=jd['marca'],modelo=jd['modelo'])
         datos = {'message': "Success"}
         return JsonResponse(datos)
     
@@ -45,8 +45,13 @@ class ProductoView(View):
         if len (producto) > 0:
             producto = Producto.objects.get (idProducto=id)
             producto.idProducto = jd ['idProducto']
+            producto.nombreProducto=jd['nombreProducto']
+            producto.precio=jd['precio']
+            producto.stock=jd['stock']
+            producto.marca=jd['marca']
+            producto.modelo=jd['modelo']
             producto.save()
-            datos={'message':"Exito"}
+            datos={'message':"Modificado Exitosamente"}
         else:
             datos={'message':"Error"}         
         return JsonResponse(datos)
@@ -57,6 +62,6 @@ class ProductoView(View):
             Producto.objects.filter(idProducto=id).delete()
             datos={'message':"Eliminado correctamente"}
         else:
-            datos={'message':"No hay usuarios"} 
+            datos={'message':"No hay productos"} 
 
         return JsonResponse(datos)
