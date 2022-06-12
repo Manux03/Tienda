@@ -24,7 +24,7 @@ namespace WebApplication5
         public DataSet WSConsulta()
         {
             string sConnectionString;
-            sConnectionString = "server=localhost;uid=root;pwd=javiera1410;database=duoc";
+            sConnectionString = "server=localhost;uid=root;pwd=123456;database=tienda";
             MySqlConnection objconn = new MySqlConnection(sConnectionString);
             objconn.Open();
             MySqlDataAdapter da = new MySqlDataAdapter("select * from core_producto", objconn);
@@ -37,7 +37,7 @@ namespace WebApplication5
         public DataSet WSBusca(int idProducto)
         {
             string sConnectionString;
-            sConnectionString = "server=localhost;uid=root;pwd=javiera1410;database=duoc";
+            sConnectionString = "server=localhost;uid=root;pwd=123456;database=tienda";
             MySqlConnection objconn = new MySqlConnection(sConnectionString);
             objconn.Open();
             MySqlDataAdapter da = new MySqlDataAdapter("select * from core_producto where idProducto='" + idProducto + "'", objconn);
@@ -47,11 +47,11 @@ namespace WebApplication5
             return ds;
         }
         [WebMethod]
-        public void WSInsert (int idProducto, string nombreProducto, int precio , int stock, string marca , string modelo)
+        public void WSInsert (int idProducto, string nombreProducto, int precio , int stock, string marca , string modelo, string imagen, string descripcion)
         {
             string sConnectionString;
-            sConnectionString = "server=localhost;uid=root;pwd=javiera1410;database=duoc";
-            string sql = "INSERT INTO core_producto (idProducto, nombreProducto, precio, stock, marca, modelo) VALUES ('" + idProducto + "', '" + nombreProducto + "','" + precio + "','" + stock + "','" + marca + "','" + modelo + "')";
+            sConnectionString = "server=localhost;uid=root;pwd=123456;database=tienda";
+            string sql = "INSERT INTO core_producto (idProducto, nombreProducto, precio, stock, marca, modelo, descripcion, imagen) VALUES ('" + idProducto + "', '" + nombreProducto + "','" + precio + "','" + stock + "','" + marca + "','" + modelo +"','" + descripcion + "','" + imagen + "')";
             MySqlConnection objconn = new MySqlConnection(sConnectionString);
             objconn.Open();
 
@@ -64,7 +64,7 @@ namespace WebApplication5
         public void WSDelete (int idProducto)
         {
             string sConnectionString;
-            sConnectionString = "server=localhost;uid=root;pwd=javiera1410;database=duoc";
+            sConnectionString = "server=localhost;uid=root;pwd=123456;database=tienda";
             string sql = "DELETE FROM core_producto WHERE idProducto= ('" + idProducto +"')";
             MySqlConnection objconn = new MySqlConnection(sConnectionString);
             objconn.Open();
@@ -75,11 +75,11 @@ namespace WebApplication5
         }
 
         [WebMethod]
-        public void WSUpdate(int idProductobusqueda, int idProducto, string nombreProducto, int precio, int stock, string marca, string modelo)
+        public void WSUpdate(int idProductobusqueda, int idProducto, string nombreProducto, int precio, int stock, string marca, string modelo, string imagen, string descripcion)
         {
             string sConnectionString;
-            sConnectionString = "server=localhost;uid=root;pwd=javiera1410;database=duoc";
-            string sql = "UPDATE core_producto SET idProducto='" + idProducto + "', nombreProducto='" + nombreProducto + "', precio='" + precio + "', stock='" + stock + "', marca='" + marca + "', modelo = '" + modelo + "' WHERE idProducto='" + idProductobusqueda + "'";
+            sConnectionString = "server=localhost;uid=root;pwd=123456;database=tienda";
+            string sql = "UPDATE core_producto SET idProducto='" + idProducto + "', nombreProducto='" + nombreProducto + "', precio='" + precio + "', stock='" + stock + "', marca='" + marca + "', modelo='" + modelo + "', descripcion='" + descripcion + "', imagen='" + imagen + "' WHERE idProducto='" + idProductobusqueda + "'";
             MySqlConnection objconn = new MySqlConnection(sConnectionString);
             objconn.Open();
 

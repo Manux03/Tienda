@@ -8,6 +8,9 @@ import json
 # Create your views here.
 def home(request):
     return render(request, 'core/home.html')
+
+def adm(request):
+    return render(request, 'core/index.html')
     
 
 # CRUD API PRODUCTO

@@ -1,7 +1,5 @@
 from pyexpat import model
 from django.db import models
-from sqlalchemy import true
-
 # Create your models here.
 
 class Producto (models.Model):
@@ -80,9 +78,12 @@ class Compra (models.Model):
     idTipopago = models.ForeignKey (Tipopago, on_delete= models.CASCADE)
     idUsuario = models.ForeignKey (Usuario, on_delete= models.CASCADE)
     idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
-    estado = models.ForeignKey (Estado, on_delete= models.CASCADE)
     
-class Compra_Detalle (models.Model):
+class Compra_Estado (models.Model):
     idcompra = models.ForeignKey (Compra, on_delete= models.CASCADE)
     idEstado = models.ForeignKey (Estado, on_delete= models.CASCADE)
     descripcion = models.CharField (max_length= 100,verbose_name='descripcion')
+
+class Compra_Detalle (models.Model):
+    idcompra = models.ForeignKey (Compra, on_delete= models.CASCADE)
+    idProducto = models.ForeignKey (Producto, on_delete= models.CASCADE)

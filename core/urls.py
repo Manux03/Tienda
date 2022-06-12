@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import home, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
+from .views import home, adm, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
 
 urlpatterns = [
     path('home/', home, name='home'),
+    path('adm/', adm, name='adm'),
     path('Producto/', ProductoView.as_view(), name='lista_de_usuarios'),
     path('Producto/<int:id>',ProductoView.as_view(), name='proceso_de_usuarios'),
     path('Familia/', FamiliaView.as_view(), name='lista_de_familia'),
