@@ -1,9 +1,17 @@
 from django.urls import path
-from .views import home, adm, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
+from .views import home, adm, tables,eliminars,ModificaProducto,AgregarProducto,AgregarFamilia,Tabla_Producto_Familia,EliminarFamilia,ModificaFamilia, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
 
 urlpatterns = [
     path('home/', home, name='home'),
     path('adm/', adm, name='adm'),
+    path('adm/tablas/Familia', Tabla_Producto_Familia, name='tablafamilia'),
+    path('adm/tablas/Producto', tables, name='tables'),
+    path('adm/añadir/Producto', AgregarProducto, name='AgregarProducto'),
+    path('adm/añadir/Familia', AgregarFamilia, name='AgregarFamilia'),
+    path('delete/<int:id>/', eliminars,name='employee_delete'),
+    path('adm/eliminar/Familia/<int:id>/', EliminarFamilia,name='EliminarFamilia'),
+    path('adm/modificar/Producto/<int:id>/', ModificaProducto,name='editar_imagen'),
+    path('adm/modificar/Familia/<int:id>/', ModificaFamilia,name='ModificarFamilia'),
     path('Producto/', ProductoView.as_view(), name='lista_de_usuarios'),
     path('Producto/<int:id>',ProductoView.as_view(), name='proceso_de_usuarios'),
     path('Familia/', FamiliaView.as_view(), name='lista_de_familia'),

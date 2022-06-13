@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views import View
 from .models import Producto, Familia, SubFamilia, Region, Provincia, Comuna, Tipo_usuario, Usuario, Sucursal, Estrategia, Estrategia_Detalle, Tipopago, Compra, Estado,Compra_Detalle
+from .forms import ProductoForm,FamiliaForm
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+
+from .models import Producto
+
 import json
 # Create your views here.
 def home(request):
@@ -11,7 +16,81 @@ def home(request):
 
 def adm(request):
     return render(request, 'core/index.html')
-    
+
+def tables(request):
+    contexto = {'usuarioslista': Producto.objects.all()}
+    return render(request, 'core/tables.html', contexto)
+
+def Tabla_Producto_Familia(request):
+    contexto = {'familialista': Familia.objects.all()}
+    return render(request, 'core/tablafamiliaproducto.html', contexto)
+
+def eliminars(request,id):
+    producto = Producto.objects.get(pk=id)
+    producto.delete()
+    return redirect('tables')
+
+def ModificaProducto(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = ProductoForm()
+        else:
+            producto = Producto.objects.get(pk=id)
+            form = ProductoForm(instance= producto)
+        return render(request, "core/eProducto.html", {'form': form})
+    else:
+        if id == 0:
+            form = ProductoForm(request.POST)
+        else:
+            producto = Producto.objects.get(pk=id)
+            form = ProductoForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('tables')
+
+def AgregarProducto(request):
+    if request.method == "GET":
+        form = ProductoForm()
+        return render(request, "core/cProducto.html", {'form': form})
+    else:
+        form = ProductoForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('tables')
+
+def AgregarFamilia(request):
+    if request.method == "GET":
+        form = FamiliaForm()
+        return render(request, "core/cFamilia.html", {'form': form})
+    else:
+        form = FamiliaForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('tablafamilia')
+
+def ModificaFamilia(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = FamiliaForm()
+        else:
+            producto = Familia.objects.get(pk=id)
+            form = FamiliaForm(instance= producto)
+        return render(request, "core/eFamilia.html", {'form': form})
+    else:
+        if id == 0:
+            form = Familia(request.POST)
+        else:
+            producto = Producto.objects.get(pk=id)
+            form = FamiliaForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('tablafamilia')
+
+
+def EliminarFamilia(request,id):
+    producto = Familia.objects.get(pk=id)
+    producto.delete()
+    return redirect('tablafamilia')
 
 # CRUD API PRODUCTO
 
@@ -40,7 +119,7 @@ class ProductoView(View):
 
     def post(self, request):
         jd=json.loads(request.body)
-        Producto.objects.create(idProducto=jd['idProducto'],nombreProducto=jd['nombreProducto'],precio=jd['precio'],stock=jd['stock'],marca=jd['marca'],modelo=jd['modelo'])
+        Producto.objects.create(idProducto=jd['idProducto'],nombreProducto=jd['nombreProducto'],precio=jd['precio'],stock=jd['stock'],marca=jd['marca'],modelo=jd['modelo'],descripcion=jd['descripcion'],imagen=jd['imagen'])
         datos = {'message': "Success"}
         return JsonResponse(datos)
     
@@ -55,6 +134,8 @@ class ProductoView(View):
             producto.stock=jd['stock']
             producto.marca=jd['marca']
             producto.modelo=jd['modelo']
+            producto.modelo=jd['descripcion']
+            producto.modelo=jd['imagen']
             producto.save()
             datos={'message':"Modificado Exitosamente"}
         else:

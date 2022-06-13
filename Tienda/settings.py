@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Admins',
-    'core'
+    'core',
+    'widget_tweaks',
+    'crispy_forms',
 ]
+crispy_template_pack = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
