@@ -69,20 +69,35 @@
                 </div>
             </div>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubFamilia"
-                    aria-expanded="true" aria-controls="collapseSubFamilia">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>SubFamilia Producto</span>
-                </a>
-                <div id="collapseSubFamilia" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">SubFamilia Producto:</h6>
-                        <a class="collapse-item" href="{% url 'tablafamilia' %}">Listar SFamilia Producto</a>
-                        <a class="collapse-item" href="{% url 'AgregarFamilia' %}">Agregar SFamilia Producto</a>
-                    </div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubFamilia"
+                aria-expanded="true" aria-controls="collapseSubFamilia">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>SubFamilia Producto</span>
+            </a>
+            <div id="collapseSubFamilia" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">SubFamilia Producto:</h6>
+                    <a class="collapse-item" href="{% url 'tablasubfamilia' %}">Listar SFamilia Producto</a>
+                    <a class="collapse-item" href="{% url 'AgregarSubFamilia' %}">Agregar SFamilia Producto</a>
                 </div>
+            </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegion"
+                aria-expanded="true" aria-controls="collapseRegion">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Region</span>
+            </a>
+            <div id="collapseRegion" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Region:</h6>
+                    <a class="collapse-item" href="{% url 'TablaRegion' %}">Listar Region</a>
+                    <a class="collapse-item" href="{% url 'AgregarRegion' %}">Agregar Region</a>
+                </div>
+            </div>
         <!-- Divider -->
         <hr class="sidebar-divider">
 

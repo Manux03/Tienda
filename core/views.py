@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 from .models import Producto, Familia, SubFamilia, Region, Provincia, Comuna, Tipo_usuario, Usuario, Sucursal, Estrategia, Estrategia_Detalle, Tipopago, Compra, Estado,Compra_Detalle
-from .forms import ProductoForm,FamiliaForm
+from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -24,6 +24,82 @@ def tables(request):
 def Tabla_Producto_Familia(request):
     contexto = {'familialista': Familia.objects.all()}
     return render(request, 'core/tablafamiliaproducto.html', contexto)
+
+def Tabla_Sub_Familia(request):
+    contexto = {'subfamilialista': SubFamilia.objects.all()}
+    return render(request, 'core/tablasubfamilia.html', contexto)
+
+def Tabla_Region(request):
+    contexto = {'regionlista': Region.objects.all()}
+    return render(request, 'core/tablaregion.html', contexto)
+
+def AgregarSubFamilia(request):
+    if request.method == "GET":
+        form = SubFamiliaForm()
+        return render(request, "core/cSubfamilia.html", {'form': form})
+    else:
+        form = SubFamiliaForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('tablasubfamilia')
+
+def AgregarRegion(request):
+    if request.method == "GET":
+        form = RegionForm()
+        return render(request, "core/cRegion.html", {'form': form})
+    else:
+        form = RegionForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaRegion')
+
+def EliminarRegion(request,id):
+    producto = Region.objects.get(pk=id)
+    producto.delete()
+    return redirect('TablaRegion')
+
+def ModificaRegion(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = RegionForm()
+        else:
+            producto = Region.objects.get(pk=id)
+            form = RegionForm(instance= producto)
+        return render(request, "core/eRegion.html", {'form': form})
+    else:
+        if id == 0:
+            form = RegionForm(request.POST)
+        else:
+            producto = Region.objects.get(pk=id)
+            form = RegionForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaRegion')
+
+
+
+
+
+
+
+
+def ModificaSubFamilia(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = SubFamiliaForm()
+        else:
+            producto = SubFamilia.objects.get(pk=id)
+            form = SubFamiliaForm(instance= producto)
+        return render(request, "core/eSubfamilia.html", {'form': form})
+    else:
+        if id == 0:
+            form = SubFamilia(request.POST)
+        else:
+            producto = SubFamilia.objects.get(pk=id)
+            form = SubFamiliaForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('tablasubfamilia')
 
 def eliminars(request,id):
     producto = Producto.objects.get(pk=id)
@@ -80,7 +156,7 @@ def ModificaFamilia(request,id=0):
         if id == 0:
             form = Familia(request.POST)
         else:
-            producto = Producto.objects.get(pk=id)
+            producto = Familia.objects.get(pk=id)
             form = FamiliaForm(request.POST or None,request.FILES or None, instance = producto)
         if form.is_valid():
             form.save()

@@ -1,17 +1,24 @@
 from django.urls import path
-from .views import home, adm, tables,eliminars,ModificaProducto,AgregarProducto,AgregarFamilia,Tabla_Producto_Familia,EliminarFamilia,ModificaFamilia, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
+from .views import home, adm, tables,eliminars,Tabla_Region,AgregarRegion,ModificaRegion,EliminarRegion,ModificaProducto,AgregarProducto,AgregarFamilia,AgregarSubFamilia,ModificaSubFamilia,Tabla_Producto_Familia,EliminarFamilia,ModificaFamilia,Tabla_Sub_Familia, ProductoView, FamiliaView, SubFamiliaView, RegionView, ProvinciaView, ComunaView ,Tipo_usuarioView, UsuarioView, SucursalView,EstrategiaView, Estrategia_DetalleView, TipopagoView, CompraView,EstadoView, Compra_DetalleView
 
 urlpatterns = [
     path('home/', home, name='home'),
     path('adm/', adm, name='adm'),
     path('adm/tablas/Familia', Tabla_Producto_Familia, name='tablafamilia'),
+    path('adm/tablas/SubFamilia', Tabla_Sub_Familia, name='tablasubfamilia'),
+    path('adm/tablas/Region', Tabla_Region, name='TablaRegion'),
     path('adm/tablas/Producto', tables, name='tables'),
     path('adm/añadir/Producto', AgregarProducto, name='AgregarProducto'),
+    path('adm/añadir/SubFamilia', AgregarSubFamilia, name='AgregarSubFamilia'),
     path('adm/añadir/Familia', AgregarFamilia, name='AgregarFamilia'),
+    path('adm/añadir/Region', AgregarRegion, name='AgregarRegion'),
     path('delete/<int:id>/', eliminars,name='employee_delete'),
     path('adm/eliminar/Familia/<int:id>/', EliminarFamilia,name='EliminarFamilia'),
+    path('adm/eliminar/Region/<int:id>/', EliminarRegion,name='EliminarRegion'),
     path('adm/modificar/Producto/<int:id>/', ModificaProducto,name='editar_imagen'),
     path('adm/modificar/Familia/<int:id>/', ModificaFamilia,name='ModificarFamilia'),
+    path('adm/modificar/SubFamiliaFamilia/<int:id>/', ModificaSubFamilia,name='ModificaSubFamilia'),
+    path('adm/modificar/Region/<int:id>/', ModificaRegion,name='ModificaRegion'),
     path('Producto/', ProductoView.as_view(), name='lista_de_usuarios'),
     path('Producto/<int:id>',ProductoView.as_view(), name='proceso_de_usuarios'),
     path('Familia/', FamiliaView.as_view(), name='lista_de_familia'),
