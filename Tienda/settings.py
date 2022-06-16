@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'widget_tweaks',
     'crispy_forms',
+    'API',
 ]
 crispy_template_pack = 'bootstrap5'
 

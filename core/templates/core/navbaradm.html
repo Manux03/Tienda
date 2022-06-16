@@ -98,6 +98,82 @@
                     <a class="collapse-item" href="{% url 'AgregarRegion' %}">Agregar Region</a>
                 </div>
             </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSucursal"
+                    aria-expanded="true" aria-controls="collapseSucursal">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Sucursal</span>
+                </a>
+                <div id="collapseSucursal" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sucursal:</h6>
+                        <a class="collapse-item" href="{% url 'TablaSucursal' %}">Listar Sucursal</a>
+                        <a class="collapse-item" href="{% url 'AgregarSucursal' %}">Agregar Sucursal</a>
+                    </div>
+                </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstado"
+                    aria-expanded="true" aria-controls="collapseEstado">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Estado</span>
+                </a>
+                <div id="collapseEstado" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sucursal:</h6>
+                        <a class="collapse-item" href="{% url 'TablaEstado' %}">Listar Estado</a>
+                        <a class="collapse-item" href="{% url 'AgregarEstado' %}">Agregar Estado</a>
+                    </div>
+                </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProvincia"
+                aria-expanded="true" aria-controls="collapseProvincia">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Provincia</span>
+            </a>
+            <div id="collapseProvincia" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Provincia:</h6>
+                    <a class="collapse-item" href="{% url 'TablaProvincia' %}">Listar Provincia</a>
+                    <a class="collapse-item" href="{% url 'AgregarProvincia' %}">Agregar Provincia</a>
+                </div>
+            </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComuna"
+                aria-expanded="true" aria-controls="collapseComuna">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Comuna</span>
+            </a>
+            <div id="collapseComuna" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Comuna:</h6>
+                    <a class="collapse-item" href="{% url 'TablaComuna' %}">Listar Comuna</a>
+                    <a class="collapse-item" href="{% url 'AgregarComuna' %}">Agregar Comuna</a>
+                    
+                </div>
+            </div>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTipoPago"
+                aria-expanded="true" aria-controls="collapseTipoPago">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Tipo de Pago</span>
+            </a>
+            <div id="collapseTipoPago" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Tipo de Pago:</h6>
+                    <a class="collapse-item" href="{% url 'TablaTipoPago' %}">Listar Tipo de Pago</a>
+                    <a class="collapse-item" href="{% url 'AgregarTipoPago' %}">Agregar Tipo de pago</a>
+                </div>
+            </div>  
         <!-- Divider -->
         <hr class="sidebar-divider">
 
