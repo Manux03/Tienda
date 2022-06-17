@@ -22,9 +22,7 @@
 
     <!-- Custom styles for this page -->
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
-
-</head>
-
+Estrategia
 <body id="page-top">
     {% load widget_tweaks %}
     <!-- Page Wrapper -->
@@ -50,19 +48,18 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Tipo de pago</div>
+                                                Agregar Estrategia</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 {% block content %}
                                                 <form action="" method="post" enctype = 'multipart/form-data'>
                                                     {% csrf_token %}
-                                                    <label>Tipo de pago</label>
+                                                    <label>Estrategia</label>
                                                     <br>
-                                                    {{ form.idTipopago | add_class:"form-control"}}
+                                                    {{ form.idEstrategia | add_class:"form-control"}}
                                                     <br>
+                                                    {{ form.nombreEstrategia | add_class:"form-control"}}
                                                     <br>
-                                                    {{ form.tipopago | add_class:"form-control"}}
-                                                    <br>
-                                                    <input type="submit" value="Agregar" class="btn btn-success float-right">
+                                                    <input type="submit" value="Modificar" class="btn btn-success float-right">
                                                     <br>
                                                     <br>
                                                     <a href="">Ir a crud de las imagenes</a>

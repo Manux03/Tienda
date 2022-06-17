@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
-from .models import Producto, Familia, SubFamilia, Region, Provincia, Comuna, Sucursal, Tipopago, Estado
-from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm, ComunaForm, TipoPagoForm, ProvinciaForm , SucursalForm, EstadoForm
+from .models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Sucursal, Tipopago, Estado, Estrategia, Compra_Estado, Compra_Detalle, Estrategia_Detalle
+from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm, ComunaForm, TipoPagoForm, ProvinciaForm , SucursalForm, EstadoForm, CompraForm, EstrategiaForm, Compra_EstadoForm, CompraDetalleForm, Estrategia_DetalleForm
 
 # Create your views here.
 def home(request):
@@ -12,6 +12,12 @@ def adm(request):
 
 def homex(request):
     return render(request, 'core/homex.html')
+
+
+
+# Vista de Tablas
+
+
 
 def tables(request):
     contexto = {'usuarioslista': Producto.objects.all()}
@@ -33,6 +39,14 @@ def TablaComuna(request):
     contexto = {'comunalista': Comuna.objects.all()}
     return render(request, 'core/tablacomuna.html', contexto)
 
+def TablaCompra_Estado(request):
+    contexto = {'Compra_Estadolista': Compra_Estado.objects.all()}
+    return render(request, 'core/tablaCompra_Estado.html', contexto)
+
+def TablaEstrategia_Detalle(request):
+    contexto = {'Estrategia_Detallelista': Estrategia_Detalle.objects.all()}
+    return render(request, 'core/tablaEstrategia_Detalle.html', contexto)
+
 def TablaEstado(request):
     contexto = {'estadolista': Estado.objects.all()}
     return render(request, 'core/tablaestado.html', contexto)
@@ -48,6 +62,57 @@ def TablaSucursal(request):
 def TablaTipoPago(request):
     contexto = {'tipopagolista': Tipopago.objects.all()}
     return render(request, 'core/tablatipopago.html', contexto)
+
+def TablaEstrategia(request):
+    contexto = {'estrategialista': Estrategia.objects.all()}
+    return render(request, 'core/tablaestrategia.html', contexto)
+
+def TablaCompraDetalle(request):
+    contexto = {'compradetallelista': Compra_Detalle.objects.all()}
+    return render(request, 'core/tablacompradetalle.html', contexto)
+
+
+
+
+
+# Vistas de Agregar (ADD)
+
+def AgregarEstrategia(request):
+    if request.method == "GET":
+        form = EstrategiaForm()
+        return render(request, "core/cEstrategia.html", {'form': form})
+    else:
+        form = EstrategiaForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaEstrategia')
+
+def EliminarEstrategia(request,id):
+    estado = Estrategia.objects.get(pk=id)
+    estado.delete()
+    return redirect('TablaEstrategia')
+
+def ModificaEstrategia(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = EstrategiaForm()
+        else:
+            producto = Estrategia.objects.get(pk=id)
+            form = EstrategiaForm(instance= producto)
+        return render(request, "core/eEstrategia.html", {'form': form})
+    else:
+        if id == 0:
+            form = EstrategiaForm(request.POST)
+        else:
+            producto = Estrategia.objects.get(pk=id)
+            form = EstrategiaForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaEstrategia')
+
+def TablaCompra(request):
+    contexto = {'compralista': Compra.objects.all()}
+    return render(request, 'core/tablacompra.html', contexto)
 
 def AgregarComuna(request):
     if request.method == "GET":
@@ -134,6 +199,16 @@ def AgregarSubFamilia(request):
             form.save()
         return redirect('tablasubfamilia')
 
+def AgregarCompraDetalle(request):
+    if request.method == "GET":
+        form = CompraDetalleForm()
+        return render(request, "core/cCompraDetalle.html", {'form': form})
+    else:
+        form = CompraDetalleForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaCompraDetalle')
+        
 def AgregarRegion(request):
     if request.method == "GET":
         form = RegionForm()
@@ -143,6 +218,26 @@ def AgregarRegion(request):
         if form.is_valid():
             form.save()
         return redirect('TablaRegion')
+
+def AgregarCompra_Estado(request):
+    if request.method == "GET":
+        form = Compra_EstadoForm()
+        return render(request, "core/cCompra_Estado.html", {'form': form})
+    else:
+        form = Compra_EstadoForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaCompra_Estado')
+
+def AgregarEstrategia_Detalle(request):
+    if request.method == "GET":
+        form = Estrategia_DetalleForm()
+        return render(request, "core/cEstrategia_Detalle.html", {'form': form})
+    else:
+        form = Estrategia_DetalleForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaEstrategia_Detalle')
 
 def AgregarEstado(request):
     if request.method == "GET":
@@ -173,6 +268,18 @@ def AgregarProvincia(request):
         if form.is_valid():
             form.save()
         return redirect('TablaProvincia')
+
+
+def AgregarCompra(request):
+    if request.method == "GET":
+        form = CompraForm()
+        return render(request, "core/cCompra.html", {'form': form})
+    else:
+        form = CompraForm(request.POST or None,request.FILES or None)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaCompra')
+
 
 def EliminarProvincia(request,id):
     provincia = Provincia.objects.get(pk=id)
@@ -250,6 +357,24 @@ def ModificaSubFamilia(request,id=0):
             form.save()
         return redirect('tablasubfamilia')
 
+def ModificaCompraDetalle(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = CompraDetalleForm()
+        else:
+            idcompra = Compra_Detalle.objects.get(pk=id)
+            form = CompraDetalleForm(instance= idcompra)
+        return render(request, "core/eCompraDetalle.html", {'form': form})
+    else:
+        if id == 0:
+            form = CompraDetalleForm(request.POST)
+        else:
+            idcompra = Compra_Detalle.objects.get(pk=id)
+            form = CompraDetalleForm(request.POST or None,request.FILES or None, instance = idcompra)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaCompraDetalle')
+
 def eliminars(request,id):
     producto = Producto.objects.get(pk=id)
     producto.delete()
@@ -273,6 +398,42 @@ def ModificaProducto(request,id=0):
             form.save()
         return redirect('tables')
 
+def ModificaCompra_Estado(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = Compra_EstadoForm()
+        else:
+            producto = Compra_Estado.objects.get(pk=id)
+            form = Compra_EstadoForm(instance= producto)
+        return render(request, "core/eCompra_Estado.html", {'form': form})
+    else:
+        if id == 0:
+            form = Compra_EstadoForm(request.POST)
+        else:
+            producto = Compra_Estado.objects.get(pk=id)
+            form = Compra_EstadoForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('tablasCompra_Estado')
+
+def ModificaEstrategia_Detalle(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = Estrategia_DetalleForm()
+        else:
+            producto = Estrategia_Detalle.objects.get(pk=id)
+            form = Estrategia_DetalleForm(instance= producto)
+        return render(request, "core/eEstrategia_Detalle.html", {'form': form})
+    else:
+        if id == 0:
+            form = Estrategia_DetalleForm(request.POST)
+        else:
+            producto = Estrategia_Detalle.objects.get(pk=id)
+            form = Estrategia_DetalleForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('tablasEstrategia_Detalle')
+
 def AgregarProducto(request):
     if request.method == "GET":
         form = ProductoForm()
@@ -292,6 +453,17 @@ def AgregarFamilia(request):
         if form.is_valid():
             form.save()
         return redirect('tablafamilia')
+
+
+
+
+
+# Vistas de Modificar (UPDATE)
+
+
+
+
+
 
 def ModificaFamilia(request,id=0):
     if request.method == "GET":
@@ -329,6 +501,32 @@ def ModificaTipoPago(request,id=0):
             form.save()
         return redirect('TablaTipoPago')
 
+def ModificaCompra(request,id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = CompraForm()
+        else:
+            producto = Compra.objects.get(pk=id)
+            form = CompraForm(instance= producto)
+        return render(request, "core/eCompra.html", {'form': form})
+    else:
+        if id == 0:
+            form = CompraForm(request.POST)
+        else:
+            producto = Compra.objects.get(pk=id)
+            form = CompraForm(request.POST or None,request.FILES or None, instance = producto)
+        if form.is_valid():
+            form.save()
+        return redirect('TablaCompra')
+
+
+
+
+
+
+# Vistas de Eliminar (DELETE)
+
+
 def EliminarFamilia(request,id):
     producto = Familia.objects.get(pk=id)
     producto.delete()
@@ -343,3 +541,9 @@ def EliminarSucursal(request,id):
     sucursal = Sucursal.objects.get(pk=id)
     sucursal.delete()
     return redirect('TablaSucursal')
+
+def EliminarCompra(request,id):
+    compra = Compra.objects.get(pk=id)
+    compra.delete()
+    return redirect('TablaComuna')
+

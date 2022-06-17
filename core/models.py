@@ -60,6 +60,7 @@ class Estrategia (models.Model):
     nombreEstrategia = models.CharField (max_length= 30,verbose_name='nombreEstrategia')
 
 class Estrategia_Detalle (models.Model):
+    idEstrategiaDetalle = models.AutoField(primary_key= True, verbose_name ='idEstrategiaDetalle')
     idEstrategia = models.ForeignKey(Producto, on_delete= models.CASCADE)
     idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
     descripcion = models.CharField (max_length= 1000,verbose_name='descripcion')
@@ -74,16 +75,18 @@ class Estado(models.Model):
 
 class Compra (models.Model):
     idCompra = models.AutoField(primary_key= True, verbose_name ='idCompra')
-    fechaCompra = models.DateTimeField(verbose_name='Fechadecompra')
+    fechaCompra = models.DateField(verbose_name='Fechadecompra')
     idTipopago = models.ForeignKey (Tipopago, on_delete= models.CASCADE)
     idUsuario = models.ForeignKey (Usuario, on_delete= models.CASCADE)
     idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
     
 class Compra_Estado (models.Model):
+    idCompraEstado = models.AutoField(primary_key= True, verbose_name ='idCompraEstado')
     idcompra = models.ForeignKey (Compra, on_delete= models.CASCADE)
     idEstado = models.ForeignKey (Estado, on_delete= models.CASCADE)
     descripcion = models.CharField (max_length= 100,verbose_name='descripcion')
 
 class Compra_Detalle (models.Model):
+    idCompraDetalle = models.AutoField(primary_key= True, verbose_name ='idCompraDetalle')
     idcompra = models.ForeignKey (Compra, on_delete= models.CASCADE)
     idProducto = models.ForeignKey (Producto, on_delete= models.CASCADE)

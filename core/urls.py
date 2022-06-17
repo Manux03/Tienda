@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AgregarComuna, AgregarTipoPago, EliminarComuna, EliminarTipopago, ModificaComuna, TablaTipoPago, home, adm, homex, tables,eliminars,Tabla_Region,TablaComuna,TablaProvincia,AgregarRegion,ModificaRegion,EliminarRegion,ModificaProducto,AgregarProducto,AgregarFamilia,AgregarProvincia,AgregarSubFamilia,ModificaSubFamilia,Tabla_Producto_Familia,EliminarFamilia,ModificaFamilia,Tabla_Sub_Familia,TablaSucursal,AgregarSucursal, ModificaSucursal, AgregarTipoPago, EliminarSucursal, EliminarProvincia ,ModificaTipoPago, EliminarSucursal, ModificaProvincia, TablaEstado, AgregarEstado, EliminarEstado, ModificaEstado
+from .views import AgregarCompra, AgregarComuna, AgregarTipoPago, EliminarCompra, EliminarComuna, EliminarTipopago, ModificaCompra, ModificaComuna, TablaCompra, TablaEstrategia, TablaTipoPago, TablaCompraDetalle, home, adm, homex, tables,eliminars,Tabla_Region,TablaComuna,TablaProvincia,AgregarRegion,ModificaRegion,EliminarRegion,ModificaProducto,AgregarProducto,AgregarFamilia,AgregarProvincia,AgregarSubFamilia,ModificaSubFamilia,Tabla_Producto_Familia,EliminarFamilia,ModificaFamilia,Tabla_Sub_Familia,TablaSucursal,AgregarSucursal, ModificaSucursal, AgregarTipoPago, EliminarSucursal, EliminarProvincia ,ModificaTipoPago, EliminarSucursal, ModificaProvincia, TablaEstado, AgregarEstado, EliminarEstado, ModificaEstado ,AgregarEstrategia, TablaCompra_Estado, AgregarCompra_Estado, ModificaCompra_Estado, EliminarEstrategia, ModificaEstrategia, AgregarCompraDetalle, ModificaCompraDetalle, TablaEstrategia_Detalle, AgregarEstrategia_Detalle, ModificaEstrategia_Detalle
 urlpatterns = [
     path('home/', home, name='home'),
     path('adm/', adm, name='adm'),
@@ -14,6 +14,12 @@ urlpatterns = [
     path('adm/tablas/Provincia', TablaProvincia, name='TablaProvincia'),
     path('adm/tablas/TipoPago', TablaTipoPago, name='TablaTipoPago'),
     path('adm/tablas/Estado', TablaEstado, name='TablaEstado'),
+    path('adm/tablas/Estrategia', TablaEstrategia, name='TablaEstrategia'),
+    path('adm/tablas/Compra_Estado', TablaCompra_Estado, name='TablaCompra_Estado'),
+    path('adm/tablas/Estrategia_Detalle', TablaEstrategia_Detalle, name='TablaEstrategia_Detalle'),
+    path('adm/tablas/CompraDetalle', TablaCompraDetalle, name='TablaCompraDetalle'),
+    path('adm/tablas/Compra', TablaCompra, name='TablaCompra'),
+
     #agregar
     path('adm/añadir/Producto', AgregarProducto, name='AgregarProducto'),
     path('adm/añadir/SubFamilia', AgregarSubFamilia, name='AgregarSubFamilia'),
@@ -24,7 +30,13 @@ urlpatterns = [
     path('adm/añadir/Sucursal', AgregarSucursal, name='AgregarSucursal'),
     path('adm/añadir/TipoPago', AgregarTipoPago, name='AgregarTipoPago'), 
     path('adm/añadir/Estado', AgregarEstado, name='AgregarEstado'), 
+    path('adm/añadir/Compra', AgregarCompra, name='AgregarCompra'), 
+    path('adm/añadir/Estrategia', AgregarEstrategia, name='AgregarEstrategia'),
+    path('adm/añadir/Compra_Estado', AgregarCompra_Estado, name='AgregarCompra_Estado'),
+    path('adm/añadir/Estrategia_Detalle', AgregarEstrategia_Detalle, name='AgregarEstrategia_Detalle'),
+    path('adm/añadir/CompraDetalle', AgregarCompraDetalle, name='AgregarCompraDetalle'),
     path('delete/<int:id>/', eliminars,name='employee_delete'),
+    
     #eliminar
     path('adm/eliminar/Familia/<int:id>/', EliminarFamilia,name='EliminarFamilia'),
     path('adm/eliminar/Provincia/<int:id>/', EliminarProvincia,name='EliminarProvincia'),
@@ -33,6 +45,8 @@ urlpatterns = [
     path('adm/eliminar/Sucursal/<int:id>/', EliminarSucursal,name='EliminarSucursal'),
     path('adm/eliminar/Estado/<int:id>/', EliminarEstado,name='EliminarEstado'),
     path('adm/eliminar/TipoPago/<int:id>/', EliminarTipopago,name='EliminarTipoPago'),
+    path('adm/eliminar/Compra/<int:id>/', EliminarCompra,name='EliminarCompra'),
+    path('adm/eliminar/Estrategia/<int:id>/', EliminarEstrategia,name='EliminarEstrategia'),
     #update
     path('adm/modificar/Producto/<int:id>/', ModificaProducto,name='editar_imagen'),
     path('adm/modificar/Familia/<int:id>/', ModificaFamilia,name='ModificarFamilia'),
@@ -40,7 +54,12 @@ urlpatterns = [
     path('adm/modificar/Provincia/<int:id>/', ModificaProvincia,name='ModificaProvincia'),
     path('adm/modificar/Region/<int:id>/', ModificaRegion,name='ModificaRegion'),
     path('adm/modificar/Comuna/<int:id>/', ModificaComuna,name='ModificaComuna'),
+    path('adm/modificar/Compra_Estado/<int:id>/', ModificaCompra_Estado,name='ModificaCompra_Estado'),
+    path('adm/modificar/Estrategia_Detalle/<int:id>/', ModificaEstrategia_Detalle,name='ModificaEstrategia_Detalle'),
     path('adm/modificar/Sucursal/<int:id>/', ModificaSucursal,name='ModificaSucursal'),
     path('adm/modificar/Estado/<int:id>/', ModificaEstado,name='ModificaEstado'),
-    path('adm/modificar/TipoPago/<int:id>/', ModificaTipoPago,name='ModificaTipoPago')
+    path('adm/modificar/TipoPago/<int:id>/', ModificaTipoPago,name='ModificaTipoPago'),
+    path('adm/modificar/Compra/<int:id>/', ModificaCompra,name='ModificaCompra'),
+    path('adm/modificar/Estrategia/<int:id>/', ModificaEstrategia,name='ModificaEstrategia'),
+    path('adm/modificar/CompraDetalle/<int:id>/', ModificaCompraDetalle,name='ModificaCompraDetalle'),
 ]
