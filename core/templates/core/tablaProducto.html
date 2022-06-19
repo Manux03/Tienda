@@ -80,23 +80,23 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for usuario in usuarioslista %}
+                                        {% for producto in productolista %}
                                         <tr>
-                                            <td>{{usuario.idProducto}}</td>
-                                            <td>{{usuario.nombreProducto}}</td>
-                                            <td>{{usuario.precio}}</td>
-                                            <td>{{usuario.stock}}</td>
-                                            <td>{{usuario.marca}}</td>
-                                            <td>{{usuario.modelo}}</td>
-                                            <td>{{usuario.descripcion}}</td>
-                                            <td>{{usuario.imagen}}</td>
+                                            <td>{{producto.idProducto}}</td>
+                                            <td>{{producto.nombreProducto}}</td>
+                                            <td>{{producto.precio}}</td>
+                                            <td>{{producto.stock}}</td>
+                                            <td>{{producto.marca}}</td>
+                                            <td>{{producto.modelo}}</td>
+                                            <td>{{producto.descripcion}}</td>
+                                            <td>{{producto.imagen}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
-                                                        <a href="{% url 'editar_imagen' usuario.idProducto %}">
+                                                        <a href="{% url 'ModificaProducto' producto.idProducto %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'employee_delete' usuario.idProducto %}" method="post">
+                                                        <form action="{% url 'EliminarProducto' producto.idProducto %}" method="post">
                                                         {% csrf_token %}
                                                             <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
                                                     </form>

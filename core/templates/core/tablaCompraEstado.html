@@ -55,6 +55,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID Compra Estado</th>
                                             <th>ID Compra</th>
                                             <th>ID Estado</th>
                                             <th>Descripción</th>
@@ -63,6 +64,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>ID Compra Estado</th>
                                             <th>ID Compra</th>
                                             <th>ID Estado</th>
                                             <th>Descripción</th>
@@ -70,21 +72,18 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for Compra_Estado in Compra_Estadolista %}
+                                        {% for compra_estado in CompraEstadolista %}
                                         <tr>
-                                            <td>{{Compra_Estado.idcompra}}</td>
-                                            <td>{{Compra_Estado.idEstado}}</td>
-                                            <td>{{Compra_Estado.descripcion}}</td>
+                                            <td>{{compra_estado.idCompraEstado}}</td>
+                                            <td>{{compra_estado.idcompra}}</td>
+                                            <td>{{compra_estado.idEstado}}</td>
+                                            <td>{{compra_estado.descripcion}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
-                                                        <a href="{% url 'ModificaCompra_Estado' compra_estado.idcompra %}">
+                                                        <a href="{% url 'ModificaCompraEstado' compra_estado.idCompraEstado %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarCompra_Estado' compra_estado.idcompra %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
                                                     </div>
                                                     
                                                 </div>

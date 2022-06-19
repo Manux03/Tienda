@@ -36,7 +36,7 @@
         </a>
 
         <div class="sidebar-heading">
-            Funciones
+            Funciones Tablas
         </div>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -48,7 +48,7 @@
             <div id="collapseProductos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Productos:</h6>
-                    <a class="collapse-item" href="{% url 'tables' %}">Listar Productos</a>
+                    <a class="collapse-item" href="{% url 'TablaProducto' %}">Listar Productos</a>
                     <a class="collapse-item" href="{% url 'AgregarProducto' %}">Agregar Producto</a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Familia Producto:</h6>
-                    <a class="collapse-item" href="{% url 'tablafamilia' %}">Listar Familia Producto</a>
+                    <a class="collapse-item" href="{% url 'TablaProductoFamilia' %}">Listar Familia Producto</a>
                     <a class="collapse-item" href="{% url 'AgregarFamilia' %}">Agregar Familia Producto        </a>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">SubFamilia Producto:</h6>
-                    <a class="collapse-item" href="{% url 'tablasubfamilia' %}">Listar SFamilia Producto</a>
+                    <a class="collapse-item" href="{% url 'TablaSubFamilia' %}">Listar SFamilia Producto</a>
                     <a class="collapse-item" href="{% url 'AgregarSubFamilia' %}">Agregar SFamilia Producto</a>
                 </div>
             </div>
@@ -98,36 +98,6 @@
                     <a class="collapse-item" href="{% url 'AgregarRegion' %}">Agregar Region</a>
                 </div>
             </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSucursal"
-                    aria-expanded="true" aria-controls="collapseSucursal">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Sucursal</span>
-                </a>
-                <div id="collapseSucursal" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Sucursal:</h6>
-                        <a class="collapse-item" href="{% url 'TablaSucursal' %}">Listar Sucursal</a>
-                        <a class="collapse-item" href="{% url 'AgregarSucursal' %}">Agregar Sucursal</a>
-                    </div>
-                </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstado"
-                    aria-expanded="true" aria-controls="collapseEstado">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Estado</span>
-                </a>
-                <div id="collapseEstado" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Sucursal:</h6>
-                        <a class="collapse-item" href="{% url 'TablaEstado' %}">Listar Estado</a>
-                        <a class="collapse-item" href="{% url 'AgregarEstado' %}">Agregar Estado</a>
-                    </div>
-                </div>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProvincia"
@@ -149,17 +119,31 @@
                 aria-expanded="true" aria-controls="collapseComuna">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Comuna</span>
-            </a>
+                </a>
             <div id="collapseComuna" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Comuna:</h6>
                     <a class="collapse-item" href="{% url 'TablaComuna' %}">Listar Comuna</a>
-                    <a class="collapse-item" href="{% url 'AgregarComuna' %}">Agregar Comuna</a>
-                    
+                    <a class="collapse-item" href="{% url 'AgregarComuna' %}">Agregar Comuna</a>        
                 </div>
             </div>
-        
+            
+        <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSucursal"
+                    aria-expanded="true" aria-controls="collapseSucursal">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Sucursal</span>
+                </a>
+                <div id="collapseSucursal" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sucursal:</h6>
+                        <a class="collapse-item" href="{% url 'TablaSucursal' %}">Listar Sucursal</a>
+                        <a class="collapse-item" href="{% url 'AgregarSucursal' %}">Agregar Sucursal</a>
+                    </div>
+                </div>    
+         
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTipoPago"
                 aria-expanded="true" aria-controls="collapseTipoPago">
@@ -174,6 +158,52 @@
                     <a class="collapse-item" href="{% url 'AgregarTipoPago' %}">Agregar Tipo de pago</a>
                 </div>
             </div>  
+                
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstado"
+                aria-expanded="true" aria-controls="collapseEstado">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Estado</span>
+            </a>
+            <div id="collapseEstado" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Sucursal:</h6>
+                    <a class="collapse-item" href="{% url 'TablaEstado' %}">Listar Estado</a>
+                    <a class="collapse-item" href="{% url 'AgregarEstado' %}">Agregar Estado</a>
+                </div>
+            </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompra_Estado"
+                aria-expanded="true" aria-controls="collapseCompra_Estado">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Estado de Compra</span>
+            </a>
+            <div id="collapseCompra_Estado" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Compra:</h6>
+                    <a class="collapse-item" href="{% url 'TablaCompraEstado' %}">Listar Estado de Compras</a>
+                    <a class="collapse-item" href="{% url 'AgregarCompraEstado' %}">Agregar Estados de Compras</a>
+                </div>
+            </div>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompraDetalle"
+                aria-expanded="true" aria-controls="collapseECompraDetalle">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Detalle de Compra</span>
+            </a>
+            <div id="collapseCompraDetalle" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Detalle de Compra:</h6>
+                    <a class="collapse-item" href="{% url 'TablaCompraDetalle' %}">Listar Detalle de compra</a>
+                    <a class="collapse-item" href="{% url 'AgregarCompraDetalle' %}">Agregar Detalle de Compra</a>
+                    <div>
+            </div>    
+         
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompra"
                 aria-expanded="true" aria-controls="collapseCompra">
@@ -190,36 +220,6 @@
             </div>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompra_Estado"
-                aria-expanded="true" aria-controls="collapseCompra_Estado">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Estado de Compra</span>
-            </a>
-            <div id="collapseCompra_Estado" class="collapse" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Compra:</h6>
-                    <a class="collapse-item" href="{% url 'TablaCompra_Estado' %}">Listar Estado de Compras</a>
-                    <a class="collapse-item" href="{% url 'AgregarCompra_Estado' %}">Agregar Estados de Compras</a>
-                </div>
-            </div>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstrategia_Detalle"
-                aria-expanded="true" aria-controls="collapseEstrategia_Detalle">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Estado de Compra</span>
-            </a>
-            <div id="collapseEstrategia_Detalle" class="collapse" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Compra:</h6>
-                    <a class="collapse-item" href="{% url 'TablaEstrategia_Detalle' %}">Listar Detalle de Estrategia</a>
-                    <a class="collapse-item" href="{% url 'AgregarEstrategia_Detalle' %}">Agregar EDetalle de Estrategia</a>
-                </div>
-            </div>
-
-        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstrategia"
                 aria-expanded="true" aria-controls="collapseEstrategia">
                 <i class="fas fa-fw fa-wrench"></i>
@@ -228,32 +228,33 @@
             <div id="collapseEstrategia" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Provincia:</h6>
+                    <h6 class="collapse-header">Estrategia:</h6>
                     <a class="collapse-item" href="{% url 'TablaEstrategia' %}">Listar Estrategia</a>
                     <a class="collapse-item" href="{% url 'AgregarEstrategia' %}">Agregar Estrategia</a>
                     <div>
             </div>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompraDetalle"
-                    aria-expanded="true" aria-controls="collapseECompraDetalle">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>CompraDetalle</span>
-                </a>
-                <div id="collapseCompraDetalle" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Provincia:</h6>
-                        <a class="collapse-item" href="{% url 'TablaCompraDetalle' %}">Listar CompraDetalle</a>
-                        <a class="collapse-item" href="{% url 'AgregarCompraDetalle' %}">Agregar CompraDetalle</a>
-                        <div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEstrategiaDetalle"
+                aria-expanded="true" aria-controls="collapseEstrategiaDetalle">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Detalle de Estrategia</span>
+            </a>
+            <div id="collapseEstrategiaDetalle" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Detalle de Estrategia:</h6>
+                    <a class="collapse-item" href="{% url 'TablaEstrategiaDetalle' %}">Listar Detalle de Estrategia</a>
+                    <a class="collapse-item" href="{% url 'AgregarEstrategiaDetalle' %}">Agregar Detalle de Estrategia</a>
                 </div>
+            </div>
+            
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Addons
+            Otras Funciones
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->

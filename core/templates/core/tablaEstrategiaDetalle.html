@@ -55,6 +55,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID Estrategia Detalle</th>
                                             <th>ID Estrategia</th>
                                             <th>ID Sucursal</th>
                                             <th>Descripción</th>
@@ -63,6 +64,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>ID Estrategia Detalle</th>
                                             <th>ID Estrategia</th>
                                             <th>ID Sucursal</th>
                                             <th>Descripción</th>
@@ -72,16 +74,17 @@
                                     <tbody>
                                         {% for Compra_Estado in Compra_Estadolista %}
                                         <tr>
+                                            <td>{{Estrategia_Detalle.idEstrategiaDetalle}}</td>
                                             <td>{{Estrategia_Detalle.idEstrategia}}</td>
                                             <td>{{Estrategia_Detalle.idSucursal}}</td>
                                             <td>{{Estrategia_Detalle.descripcion}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
-                                                        <a href="{% url 'ModificaEstrategia_Detalle' estrategia_detalle.idEstrategia %}">
+                                                        <a href="{% url 'ModificaEstrategiaDetalle' estrategiadetalle.idEstrategiaDetalle %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarEstrategia_Detalle' estrategia_detalle.idEstrategia %}" method="post">
+                                                        <form action="{% url 'EliminarEstrategiaDetalle' estrategiadetalle.idEstrategiaDetalle %}" method="post">
                                                             {% csrf_token %}
                                                                 <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
                                                         </form>

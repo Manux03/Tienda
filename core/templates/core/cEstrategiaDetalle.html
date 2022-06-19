@@ -50,12 +50,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Agregar Detalle de Estretegia</div>
+                                                Agregar Detalle de Estrategia</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 {% block content %}
                                                 <form action="" method="post" enctype = 'multipart/form-data'>
                                                     {% csrf_token %}
-                                                    <label>ID Estretegia</label>
+                                                    <label>ID Estrategia</label>
                                                     <br>
                                                     {{ form.idEstrategia | add_class:"form-control"}}
                                                     <br>
