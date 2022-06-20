@@ -11,6 +11,14 @@ def adm(request):
 def homex(request):
     return render(request, 'core/homex.html')
 
+def Tienda (request):
+    contexto = {'productolista': Producto.objects.all()}
+    return render (request,'core/tiendalista.html', contexto)
+
+def ProductoDetalle (request, id):
+    contexto = {'productodetalle': SubFamilia.objects.select_related('producto','familia').get(producto = id)}
+    print (contexto)
+    return render (request,'core/detalleProducto.html', contexto)
 
 # Vista de Tablas
 
@@ -31,7 +39,7 @@ def TablaRegion(request):
     return render(request, 'core/tablaRegion.html', contexto)
 
 def TablaComuna(request):
-    contexto = {'comunalista': Comuna.objects.all()}
+    contexto = {'comunalista': Comuna.objects.select_related('Provincia_idProvincia').all()}
     return render(request, 'core/tablaComuna.html', contexto)
 
 def TablaCompraEstado(request):
@@ -47,11 +55,11 @@ def TablaEstado(request):
     return render(request, 'core/tablaEstado.html', contexto)
 
 def TablaProvincia(request):
-    contexto = {'provincialista': Provincia.objects.all()}
+    contexto = {'provincialista': Provincia.objects.select_related('region_idRegion').all()}
     return render(request, 'core/tablaProvincia.html', contexto)
 
 def TablaSucursal(request):
-    contexto = {'sucursallista': Sucursal.objects.all()}
+    contexto = {'sucursallista': Sucursal.objects.select_related('idComuna').all()}
     return render(request, 'core/tablaSucursal.html', contexto)
 
 def TablaTipoPago(request):
@@ -72,7 +80,7 @@ def TablaCompra(request):
 
 
 
-# Vistas de Agregar (ADD)
+# Vistas de Agregar (ADD) ORDENAR!!!!!!
 
 def AgregarEstrategia(request):
     if request.method == "GET":

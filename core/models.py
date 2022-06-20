@@ -9,8 +9,8 @@ class Producto (models.Model):
     stock = models.IntegerField (verbose_name ='stock')
     marca = models.CharField (max_length= 50,verbose_name='marca')
     modelo = models.CharField (max_length= 50,verbose_name='modelo')
-    descripcion = models.CharField (max_length= 50,verbose_name='descripcion')
-    imagen = models.CharField (max_length= 50,verbose_name='imagen')
+    descripcion = models.CharField (max_length= 150,verbose_name='descripcion')
+    imagen = models.TextField (verbose_name='imagen')
 
 class Familia (models.Model):
     idFamilia = models.AutoField(primary_key= True, verbose_name ='idFamilia')

@@ -1,15 +1,16 @@
 from django.urls import path
-from .views import (AgregarCompra, AgregarComuna, AgregarTipoPago, EliminarCompra, EliminarComuna, EliminarTipopago, ModificaCompra, 
-ModificaComuna, TablaCompra, TablaEstrategia, TablaTipoPago, TablaCompraDetalle, home, adm, homex, TablaProducto,EliminarProducto,
-TablaRegion,TablaComuna, TablaProvincia, AgregarRegion, ModificaRegion, EliminarRegion, ModificaProducto, AgregarProducto,AgregarFamilia,AgregarProvincia,
-AgregarSubFamilia,ModificaSubFamilia,TablaProductoFamilia,EliminarFamilia,ModificaFamilia,TablaSubFamilia,TablaSucursal,AgregarSucursal, ModificaSucursal, 
-AgregarTipoPago, EliminarSucursal, EliminarProvincia ,ModificaTipoPago, EliminarSucursal, ModificaProvincia, TablaEstado, AgregarEstado, EliminarEstado, ModificaEstado, 
-AgregarEstrategia, TablaCompraEstado, AgregarCompraEstado, ModificaCompraEstado, EliminarEstrategia, ModificaEstrategia, AgregarCompraDetalle, ModificaCompraDetalle, 
-TablaEstrategiaDetalle, AgregarEstrategiaDetalle, ModificaEstrategiaDetalle)
+from .views import Tienda, home, adm, homex, ProductoDetalle
+from .views import TablaProducto,TablaProductoFamilia,TablaSubFamilia,TablaRegion,TablaProvincia,TablaComuna,TablaSucursal,TablaTipoPago,TablaEstado, TablaCompraEstado,TablaCompraDetalle,TablaCompra, TablaEstrategia,TablaEstrategiaDetalle 
+from .views import AgregarProducto, AgregarFamilia, AgregarSubFamilia, AgregarRegion, AgregarProvincia, AgregarComuna, AgregarSucursal, AgregarTipoPago, AgregarEstado, AgregarCompraEstado, AgregarCompraDetalle, AgregarCompra, AgregarEstrategia, AgregarEstrategiaDetalle
+from .views import EliminarProducto, EliminarFamilia, EliminarRegion,EliminarProvincia, EliminarComuna, EliminarSucursal, EliminarTipopago, EliminarEstado, EliminarCompra,  EliminarEstrategia
+from .views import  ModificaProducto, ModificaFamilia, ModificaSubFamilia, ModificaRegion, ModificaProvincia,ModificaComuna, ModificaSucursal, ModificaTipoPago, ModificaEstado, ModificaCompraEstado, ModificaCompraDetalle, ModificaCompra, ModificaEstrategia, ModificaEstrategiaDetalle    
+
 urlpatterns = [
     path('home/', home, name='home'),
     path('adm/', adm, name='adm'),
     path('homex/', homex, name='homex'),
+    path('Tienda/', Tienda, name='Tienda'),
+    path('Tienda/Producto/<int:id>/', ProductoDetalle,name='ProductoDetalle'), 
     #listar
     path('adm/tablas/Producto', TablaProducto, name='TablaProducto'), # FUNCIONA
     path('adm/tablas/Familia', TablaProductoFamilia, name='TablaProductoFamilia'), # FUNCIONA
