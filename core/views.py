@@ -43,7 +43,7 @@ def TablaComuna(request):
     return render(request, 'core/tablaComuna.html', contexto)
 
 def TablaCompraEstado(request):
-    contexto = {'CompraEstadolista': Compra_Estado.objects.all()}
+    contexto = {'CompraEstadolista': Compra_Estado.objects.select_related('idcompra', 'idEstado').all()}
     return render(request, 'core/tablaCompraEstado.html', contexto)
 
 def TablaEstrategiaDetalle(request):
@@ -71,11 +71,11 @@ def TablaEstrategia(request):
     return render(request, 'core/tablaEstrategia.html', contexto)
 
 def TablaCompraDetalle(request):
-    contexto = {'compradetallelista': Compra_Detalle.objects.all()}
+    contexto = {'compradetallelista': Compra_Detalle.objects.select_related('idcompra', 'idProducto').all()}
     return render(request, 'core/tablacompraDetalle.html', contexto)
 
 def TablaCompra(request):
-    contexto = {'compralista': Compra.objects.all()}
+    contexto = {'compralista': Compra.objects.select_related('idTipopago', 'idUsuario', 'idSucursal').all()}
     return render(request, 'core/tablaCompra.html', contexto)
 
 

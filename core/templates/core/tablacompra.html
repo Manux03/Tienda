@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-cl">
     {% load static %}
 <head>
 
@@ -57,9 +57,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Fecha Compra</th>
-                                            <th>ID Tipo Pago</th>
+                                            <th>Tipo Pago</th>
                                             <th>ID Usuario</th>
-                                            <th>ID Sucursal</th>
+                                            <th>Sucursal</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
@@ -67,9 +67,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Fecha Compra</th>
-                                            <th>ID Tipo Pago</th>
+                                            <th>Tipo Pago</th>
                                             <th>ID Usuario</th>
-                                            <th>ID Sucursal</th>
+                                            <th>Sucursal</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </tfoot>
@@ -78,9 +78,9 @@
                                         <tr>
                                             <td>{{compra.idCompra}}</td>
                                             <td>{{compra.fechaCompra}}</td>
-                                            <td>{{compra.idTipopago}}</td>
-                                            <td>{{compra.idUsuario}}</td>
-                                            <td>{{compra.idSucursal}}</td>
+                                            <td>{{compra.idTipopago.tipopago}}</td>
+                                            <td>{{compra.idUsuario.idUsuario}}</td>
+                                            <td>{{compra.idSucursal.sucursal}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
