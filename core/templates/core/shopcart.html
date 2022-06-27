@@ -73,8 +73,19 @@
                         <b class="pl-md-4">SubTotal =<span class="pl-md-4">${{total_carrito}}</span></b>
                     </div>
                     <div>
-                        <button class="btn btn-sm bg-dark text-white px-lg-5 px-3">Continuar</button>
+                        <a href="">
+                            <p>{{ url }}</p>
+                            <p>{{ token }}</p>
+                            <button onclick={PostApi} class="btn btn-sm bg-dark text-white px-lg-5 px-3">Continuar</button>
+                        </a>
                     </div>
+                    <br>
+                    {% csrf_token %}
+                    <form action="{{ url }}" method="POST" {% csrf_token %}>
+                        <input type="hidden" name="token_ws" value="{{ token }}">
+                        <input type="submit" value="Ejecutar Pago con Webpay">
+                        </form>
+                    <br>
                 </div>
             </div>
         </div>
@@ -82,5 +93,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/APITBK.js'%} "></script>
 </body>
 </html>
