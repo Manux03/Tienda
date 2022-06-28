@@ -41,7 +41,7 @@ class Usuario (AbstractBaseUser):
     email = models.EmailField('Correo Electronico',unique = 'True', max_length=254)
     nombres = models.CharField('Nombre', max_length=200, null = 'False')
     apellidos = models.CharField('Apellido', max_length=200, null = 'False')
-    idTipousuario = models.ForeignKey(Tipo_usuario, on_delete= models.CASCADE)
+    idTipousuario = models.ForeignKey(Tipo_usuario, on_delete= models.CASCADE, default=1)
     usuario_administrador = models.BooleanField( default = False)
     usuario_superuser = models.BooleanField( default = False)
     objects = UsuarioManager()

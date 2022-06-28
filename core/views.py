@@ -3,9 +3,9 @@ from .models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Co
 from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm, ComunaForm, TipoPagoForm, ProvinciaForm , SucursalForm, EstadoForm, CompraForm, EstrategiaForm, CompraEstadoForm, CompraDetalleForm, EstrategiaDetalleForm
 from django.views.generic.edit import FormView #user
 from django.urls import reverse_lazy
-from django.contrib.auth import login,logout
+from django.contrib.auth import login,logout, authenticate
 from django.http import HttpResponseRedirect
-from .forms import FormularioLogin, FormularioUsuario, FormularioModifica
+from .forms import FormularioLogin, FormularioUsuario, FormularioModifica, CustomUserCreationForm
 from django.views.generic import TemplateView, CreateView
 from .models import Usuario
 from django.utils.decorators import method_decorator
@@ -23,6 +23,23 @@ def adm(request):
 def homex(request):
     return render(request, 'core/homex.html')
 
+def registro(request):
+
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Te has registrado correctamente")
+            return redirect(to="index")
+        data["form"] = formulario
+    return render(request, 'registration/registro.html', data)
+
 def Tienda (request):
     contexto = {'productolista': Producto.objects.all()}
     return render (request,'core/tiendalista.html', contexto)
@@ -31,6 +48,9 @@ def ProductoDetalle (request, id):
     contexto = {'productodetalle': SubFamilia.objects.select_related('producto','familia').get(producto = id)}
     print (contexto)
     return render (request,'core/detalleProducto.html', contexto)
+
+def login(request):
+    return render(request, 'core/Login.html')
 
 # Vista de Tablas
 

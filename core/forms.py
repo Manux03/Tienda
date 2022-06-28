@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Tipopago, Sucursal, Estado, Estrategia, Compra_Estado, Compra_Detalle, Estrategia_Detalle
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from core.models import Usuario
 
 class ProductoForm(ModelForm):
@@ -173,3 +173,6 @@ class FormularioModifica (ModelForm):
             'apellidos':'Apellidos',
             'email':'Email'
         }
+
+class CustomUserCreationForm(UserCreationForm):
+    pass    

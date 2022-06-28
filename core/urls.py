@@ -1,16 +1,23 @@
 from django.urls import path
-from .views import Tienda, home, adm, homex, ProductoDetalle
+from .views import Tienda, home, adm, homex, ProductoDetalle, login
 from .views import TablaProducto,TablaProductoFamilia,TablaSubFamilia,TablaRegion,TablaProvincia,TablaComuna,TablaSucursal,TablaTipoPago,TablaEstado, TablaCompraEstado,TablaCompraDetalle,TablaCompra, TablaEstrategia,TablaEstrategiaDetalle 
 from .views import AgregarProducto, AgregarFamilia, AgregarSubFamilia, AgregarRegion, AgregarProvincia, AgregarComuna, AgregarSucursal, AgregarTipoPago, AgregarEstado, AgregarCompraEstado, AgregarCompraDetalle, AgregarCompra, AgregarEstrategia, AgregarEstrategiaDetalle
-from .views import EliminarProducto, EliminarFamilia, EliminarRegion,EliminarProvincia, EliminarComuna, EliminarSucursal, EliminarTipopago, EliminarEstado, EliminarCompra,  EliminarEstrategia
+from .views import EliminarProducto, EliminarFamilia, EliminarRegion,EliminarProvincia, EliminarComuna, EliminarSucursal, EliminarTipopago, EliminarEstado, EliminarCompra,  EliminarEstrategia, registro
 from .views import  ModificaProducto, ModificaFamilia, ModificaSubFamilia, ModificaRegion, ModificaProvincia,ModificaComuna, ModificaSucursal, ModificaTipoPago, ModificaEstado, ModificaCompraEstado, ModificaCompraDetalle, ModificaCompra, ModificaEstrategia, ModificaEstrategiaDetalle    
+from .views import login, logoutUsuario,RegistrarUsuario, lista, modifica,eliminar #user
+from django.contrib.auth.decorators import login_required #user
+from django.conf import settings #user
+from django.conf.urls.static import static #user
+
 
 urlpatterns = [
     path('home/', home, name='home'),
     path('adm/', adm, name='adm'),
     path('homex/', homex, name='homex'),
     path('Tienda/', Tienda, name='Tienda'),
+    path('registro/', registro, name="registro"),
     path('Tienda/Producto/<int:id>/', ProductoDetalle,name='ProductoDetalle'), 
+    path('login/', login, name='login'),
     #listar
     path('adm/tablas/Producto', TablaProducto, name='TablaProducto'), # FUNCIONA
     path('adm/tablas/Familia', TablaProductoFamilia, name='TablaProductoFamilia'), # FUNCIONA
@@ -71,5 +78,13 @@ urlpatterns = [
     path('adm/modificar/Estrategia/<int:id>/', ModificaEstrategia,name='ModificaEstrategia'), # FUNCIONA
     path('adm/modificar/Estrategia_Detalle/<int:id>/', ModificaEstrategiaDetalle,name='ModificaEstrategiaDetalle'),
     
-    
+
+    #usersssss
+
+    path('logout/',login_required(logoutUsuario),name = 'logout'),
+    path('registrar_usuario/',RegistrarUsuario.as_view(),name = 'registro'),
+    path('', lista,name='insertar_empleado'), #postear y get req para insertar operacion
+    path('lista/', lista,name='lista'), #tomar req, para mostrar datos
+    path('<int:id>/', modifica,name='employee_update'),
+    path('delete/<int:id>/', eliminar,name='employee_delete'),
 ]
