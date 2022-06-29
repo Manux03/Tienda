@@ -47,6 +47,11 @@
                 <a class="nav-link text-white" href="{% url 'adm' %}">Panel Admin</a>
               </li>
               {% endif %}
+              {% if user.is_vendedor %}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'adm' %}">Panel Admin22</a>
+              </li>
+              {% endif %}
             {% else %}
               <li class="nav-item">
                 <a class="nav-link text-white" href="{% url 'login' %}">Login</a>

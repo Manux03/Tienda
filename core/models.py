@@ -1,6 +1,6 @@
 from pyexpat import model
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Group
 # Create your models here.
 
 
@@ -22,6 +22,11 @@ class UsuarioManager(BaseUserManager):
         )
 
         usuario.set_password(password)
+        usuario.usuario_administrador = True
+        usuario.usuario_superuser = True
+        usuario.usuario_vendedor = True
+        usuario.usuario_bodeguero = True
+        usuario.usuario_contador = True
         usuario.save()
         return usuario
 
@@ -33,8 +38,6 @@ class UsuarioManager(BaseUserManager):
             apellidos = apellidos,
             password = password
         ) 
-        usuario.usuario_administrador = True
-        usuario.usuario_superuser = True
         usuario.save()
         return usuario
 
@@ -45,9 +48,11 @@ class Usuario (AbstractBaseUser):
     email = models.EmailField('Correo Electronico',unique = 'True', max_length=254)
     nombres = models.CharField('Nombre', max_length=200, null = 'False')
     apellidos = models.CharField('Apellido', max_length=200, null = 'False')
-    idTipousuario = models.ForeignKey(Tipo_usuario, on_delete= models.CASCADE, default=1)
     usuario_administrador = models.BooleanField( default = False)
     usuario_superuser = models.BooleanField( default = False)
+    usuario_vendedor = models.BooleanField( default = False)
+    usuario_bodeguero = models.BooleanField( default = False)
+    usuario_contador = models.BooleanField( default = False)
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'username'
@@ -61,7 +66,6 @@ class Usuario (AbstractBaseUser):
 
     def has_module_perms (self, app_label):
         return True
-
     @property
     def is_staff(self):
         return self.usuario_administrador
@@ -69,7 +73,18 @@ class Usuario (AbstractBaseUser):
     @property
     def is_superuser(self):
         return self.usuario_superuser
+    @property
+    def is_vendedor(self):
+        return self.usuario_vendedor
+
+    @property
+    def is_bodeguero(self):
+        return self.usuario_bodeguero
     
+    @property
+    def is_contador(self):
+        return self.usuario_contador
+
 class Producto (models.Model):
     idProducto = models.AutoField(primary_key= True, verbose_name ='idProducto')
     nombreProducto = models.CharField (max_length= 100,verbose_name='nombreProducto')
@@ -80,29 +95,45 @@ class Producto (models.Model):
     descripcion = models.CharField (max_length= 150,verbose_name='descripcion')
     imagen = models.TextField (verbose_name='imagen')
 
+    def __str__(self):
+        return '%s' % (self.nombreProducto)
+
 class Familia (models.Model):
     idFamilia = models.AutoField(primary_key= True, verbose_name ='idFamilia')
     nombreFamilia = models.CharField (max_length= 100,verbose_name='nombreFamilia')
+
+    def __str__(self):
+        return '%s' % (self.nombreFamilia)
 
 class SubFamilia (models.Model):
     idSubFamilia = models.AutoField(primary_key= True, verbose_name= 'idSubFamilia')
     SubFamilia = models.CharField (max_length= 100,verbose_name='subFamilia')
     producto = models.ForeignKey(Producto, on_delete= models.CASCADE)
     familia = models.ForeignKey (Familia, on_delete= models.CASCADE) 
+
     
 class Region (models.Model):
     idRegion = models.AutoField(primary_key= True, verbose_name ='idRegion')
     nombre_region = models.CharField (max_length= 30,verbose_name='nombreregion')
 
+    def __str__(self):
+        return '%s' % (self.nombre_region)
+
 class Provincia (models.Model):
     idProvincia = models.AutoField(primary_key= True, verbose_name ='idProvincia')
     region_idRegion = models.ForeignKey(Region, on_delete= models.CASCADE)
     nombre_provincia = models.CharField (max_length= 30,verbose_name='Nombreprovincia')
+
+    def __str__(self):
+        return '%s' % (self.nombre_provincia)
     
 class Comuna (models.Model):
     idComuna = models.AutoField(primary_key= True, verbose_name ='idComuna')
     Provincia_idProvincia =  models.ForeignKey(Provincia, on_delete= models.CASCADE)
     nombre_comuna = models.CharField (max_length= 30,verbose_name='NombreComuna')
+
+    def __str__(self):
+        return '%s' % (self.nombre_comuna)
 
 
 class Sucursal (models.Model):
@@ -112,9 +143,15 @@ class Sucursal (models.Model):
     telefono = models.CharField (max_length= 30,verbose_name='telefono')
     idComuna = models.ForeignKey(Comuna, on_delete= models.CASCADE)
 
+    def __str__(self):
+        return '%s' % (self.sucursal)
+
 class Estrategia (models.Model):
     idEstrategia = models.AutoField(primary_key= True, verbose_name= 'idEstrategia')
     nombreEstrategia = models.CharField (max_length= 30,verbose_name='nombreEstrategia')
+
+    def __str__(self):
+        return '%s' % (self.nombreEstrategia)
 
 class Estrategia_Detalle (models.Model):
     idEstrategiaDetalle = models.AutoField(primary_key= True, verbose_name ='idEstrategiaDetalle')
@@ -126,9 +163,17 @@ class Tipopago (models.Model):
     idTipopago = models.AutoField(primary_key= True, verbose_name ='idTipopago')
     tipopago = models.CharField (max_length= 100,verbose_name='tipopago')
 
+    def __str__(self):
+        return '%s' % (self.tipopago)
+
+
 class Estado(models.Model):
     idEstado = models.AutoField(primary_key= True, verbose_name ='idEstado')
     estado = models.CharField (max_length= 100,verbose_name='estado')
+
+    def __str__(self):
+        return '%s' % (self.estado)
+
 
 class Compra (models.Model):
     idCompra = models.AutoField(primary_key= True, verbose_name ='idCompra')
@@ -137,6 +182,7 @@ class Compra (models.Model):
     idUsuario = models.ForeignKey (Usuario, on_delete= models.CASCADE)
     idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
     idEstado = models.ForeignKey (Estado, on_delete= models.CASCADE)
+
 
 class Compra_Detalle (models.Model):
     idCompraDetalle = models.AutoField(primary_key= True, verbose_name ='idCompraDetalle')

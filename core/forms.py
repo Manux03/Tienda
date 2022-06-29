@@ -89,7 +89,7 @@ class FormularioUsuario(forms.ModelForm):
 class FormularioModifica (ModelForm):
     class Meta:
         model = Usuario
-        fields = ('nombres','apellidos','email','usuario_administrador')
+        fields = ('nombres','apellidos','email')
         labels = {
             'nombres':'Nombres',
             'apellidos':'Apellidos',
