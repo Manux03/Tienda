@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from core.models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Sucursal, Tipopago, Estado, Estrategia, Compra_Estado, Compra_Detalle, Estrategia_Detalle
-from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm, ComunaForm, TipoPagoForm, ProvinciaForm , SucursalForm, EstadoForm, CompraForm, EstrategiaForm, CompraEstadoForm, CompraDetalleForm, EstrategiaDetalleForm
+from core.models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Sucursal, Tipopago, Estado, Estrategia, Compra_Detalle, Estrategia_Detalle
+from .forms import ProductoForm,FamiliaForm,SubFamiliaForm, RegionForm, ComunaForm, TipoPagoForm, ProvinciaForm , SucursalForm, EstadoForm, CompraForm, EstrategiaForm, CompraDetalleForm, EstrategiaDetalleForm
 
 # Create your views here.
 def adm(request):
@@ -44,10 +44,6 @@ def TablaEstado(request):
     contexto = {'estadolista': Estado.objects.all()}
     return render(request, 'tablaEstado.html', contexto)
    
-def TablaCompraEstado(request):
-    contexto = {'CompraEstadolista': Compra_Estado.objects.select_related('idcompra', 'idEstado').all()}
-    return render(request, 'tablaCompraEstado.html', contexto)
-
 def TablaCompraDetalle(request):
     contexto = {'compradetallelista': Compra_Detalle.objects.select_related('idcompra', 'idProducto').all()}
     return render(request, 'tablacompraDetalle.html', contexto)
@@ -150,15 +146,7 @@ def AgregarEstado(request):
         if form.is_valid():
             form.save()
         return redirect('TablaEstado')
-def AgregarCompraEstado(request):
-    if request.method == "GET":
-        form = CompraEstadoForm()
-        return render(request, "cCompraEstado.html", {'form': form})
-    else:
-        form = CompraEstadoForm(request.POST or None,request.FILES or None)
-        if form.is_valid():
-            form.save()
-        return redirect('TablaCompraEstado')
+        
 def AgregarCompraDetalle(request):
     if request.method == "GET":
         form = CompraDetalleForm()
@@ -343,23 +331,6 @@ def ModificaTipoPago(request,id=0):
             form.save()
         return redirect('TablaTipoPago')
 
-def ModificaCompraEstado(request,id=0):
-    if request.method == "GET":
-        if id == 0:
-            form = CompraEstadoForm()
-        else:
-            producto = Compra_Estado.objects.get(pk=id)
-            form = CompraEstadoForm(instance= producto)
-        return render(request, "eCompraEstado.html", {'form': form})
-    else:
-        if id == 0:
-            form = CompraEstadoForm(request.POST)
-        else:
-            producto = Compra_Estado.objects.get(pk=id)
-            form = CompraEstadoForm(request.POST or None,request.FILES or None, instance = producto)
-        if form.is_valid():
-            form.save()
-        return redirect('TablaCompraEstado')
 
 def ModificaEstado(request,id=0):
     if request.method == "GET":

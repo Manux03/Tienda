@@ -1,5 +1,7 @@
+""""""
+
 from django.forms import ModelForm
-from core.models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Tipopago, Sucursal, Estado, Estrategia, Compra_Estado, Compra_Detalle, Estrategia_Detalle
+from core.models import Compra, Producto, Familia, SubFamilia, Region, Provincia, Comuna, Tipopago, Sucursal, Estado, Estrategia, Compra_Detalle, Estrategia_Detalle
 
 class ProductoForm(ModelForm):
     class Meta:
@@ -54,17 +56,12 @@ class EstadoForm(ModelForm):
 class CompraForm(ModelForm):
     class Meta:
         model = Compra
-        fields = ['idCompra', 'fechaCompra', 'idTipopago', 'idUsuario', 'idSucursal']
+        fields = ['idCompra', 'fechaCompra', 'idUsuario','idTipopago', 'idSucursal','idEstado']
 
 class EstrategiaForm(ModelForm):
     class Meta:
         model = Estrategia
         fields = ['idEstrategia', 'nombreEstrategia']
-
-class CompraEstadoForm(ModelForm):
-    class Meta:
-        model = Compra_Estado
-        fields = ['idCompraEstado','idcompra', 'idEstado', 'descripcion']
 
 class EstrategiaDetalleForm(ModelForm):
     class Meta:

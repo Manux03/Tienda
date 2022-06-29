@@ -364,7 +364,7 @@ class Tipo_usuarioView(View):
 
     def post(self, request):
         jd=json.loads(request.body)
-        Tipo_usuario.objects.create(idTipo_usuario=jd['idTipo_usuario'],descripcion=jd['descripcion'],descuento=jd['descuento'])
+        Tipo_usuario.objects.create(idTipo_usuario=jd['idTipo_usuario'],descripcion=jd['descripcion'])
         datos = {'message': "Success"}
         return JsonResponse(datos)
         
@@ -421,7 +421,7 @@ class UsuarioView(View):
 
     def post(self, request):
         jd=json.loads(request.body)
-        Usuario.objects.create(idUsuario=jd['idUsuario'],Nombre=jd['Nombre'],Apellido=jd['Apellido'],email=jd['email'],Tipo_usuario_idUsuario=jd['Tipo_usuario_idUsuario'])
+        Usuario.objects.create(idUsuario=jd['idUsuario'],username=jd['username'],email=jd['email'],nombres=jd['nombres'],apellidos=jd['apellidos'],idTipousuario=jd['idTipousuario'],usuario_administrador=jd['usuario_administrador'],usuario_superuser=jd['usuario_superuser'],objects=jd['objects'])
         datos = {'message': "Success"}
         return JsonResponse(datos)
         

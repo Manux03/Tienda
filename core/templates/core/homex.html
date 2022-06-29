@@ -35,12 +35,26 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'Tienda' %}">Productos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Registro</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'Login' %}">Login</a>
-            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="">@{{ user.username }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% if user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'adm' %}">Panel Admin</a>
+              </li>
+              {% endif %}
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'registro' %}">Registro</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>

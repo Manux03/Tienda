@@ -1,9 +1,9 @@
 from django.urls import path
 from .views import adm
-from .views import TablaProducto,TablaProductoFamilia,TablaSubFamilia,TablaRegion,TablaProvincia,TablaComuna,TablaSucursal,TablaTipoPago,TablaEstado, TablaCompraEstado,TablaCompraDetalle,TablaCompra, TablaEstrategia,TablaEstrategiaDetalle 
-from .views import AgregarProducto, AgregarFamilia, AgregarSubFamilia, AgregarRegion, AgregarProvincia, AgregarComuna, AgregarSucursal, AgregarTipoPago, AgregarEstado, AgregarCompraEstado, AgregarCompraDetalle, AgregarCompra, AgregarEstrategia, AgregarEstrategiaDetalle
+from .views import TablaProducto,TablaProductoFamilia,TablaSubFamilia,TablaRegion,TablaProvincia,TablaComuna,TablaSucursal,TablaTipoPago,TablaEstado,TablaCompraDetalle,TablaCompra, TablaEstrategia,TablaEstrategiaDetalle 
+from .views import AgregarProducto, AgregarFamilia, AgregarSubFamilia, AgregarRegion, AgregarProvincia, AgregarComuna, AgregarSucursal, AgregarTipoPago, AgregarEstado,  AgregarCompraDetalle, AgregarCompra, AgregarEstrategia, AgregarEstrategiaDetalle
 from .views import EliminarProducto, EliminarFamilia, EliminarRegion,EliminarProvincia, EliminarComuna, EliminarSucursal, EliminarTipopago, EliminarEstado, EliminarCompra,  EliminarEstrategia
-from .views import  ModificaProducto, ModificaFamilia, ModificaSubFamilia, ModificaRegion, ModificaProvincia,ModificaComuna, ModificaSucursal, ModificaTipoPago, ModificaEstado, ModificaCompraEstado, ModificaCompraDetalle, ModificaCompra, ModificaEstrategia, ModificaEstrategiaDetalle    
+from .views import  ModificaProducto, ModificaFamilia, ModificaSubFamilia, ModificaRegion, ModificaProvincia,ModificaComuna, ModificaSucursal, ModificaTipoPago, ModificaEstado, ModificaCompraDetalle, ModificaCompra, ModificaEstrategia, ModificaEstrategiaDetalle    
 
 urlpatterns = [
     
@@ -18,7 +18,6 @@ urlpatterns = [
     path('tablas/Sucursal', TablaSucursal, name='TablaSucursal'), # FUNCIONA
     path('tablas/TipoPago', TablaTipoPago, name='TablaTipoPago'), # FUNCIONA
     path('tablas/Estado', TablaEstado, name='TablaEstado'),  # FUNCIONA
-    path('tablas/Compra_Estado', TablaCompraEstado, name='TablaCompraEstado'),  # FUNCIONA
     path('tablas/CompraDetalle', TablaCompraDetalle, name='TablaCompraDetalle'), # FUNCIONA
     path('tablas/Compra', TablaCompra, name='TablaCompra'), # FUNCIONA
     path('tablas/Estrategia', TablaEstrategia, name='TablaEstrategia'), # FUNCIONA
@@ -34,7 +33,6 @@ urlpatterns = [
     path('añadir/Sucursal', AgregarSucursal, name='AgregarSucursal'), # FUNCIONA
     path('añadir/TipoPago', AgregarTipoPago, name='AgregarTipoPago'), # FUNCIONA
     path('añadir/Estado', AgregarEstado, name='AgregarEstado'), # FUNCIONA
-    path('añadir/Compra_Estado', AgregarCompraEstado, name='AgregarCompraEstado'),  # FUNCIONA
     path('añadir/CompraDetalle', AgregarCompraDetalle, name='AgregarCompraDetalle'), # FUNCIONA
     path('añadir/Compra', AgregarCompra, name='AgregarCompra'),  # FUNCIONA
     path('añadir/Estrategia', AgregarEstrategia, name='AgregarEstrategia'), # FUNCIONA
@@ -62,7 +60,6 @@ urlpatterns = [
     path('modificar/Sucursal/<int:id>/', ModificaSucursal,name='ModificaSucursal'), # FUNCIONA
     path('modificar/TipoPago/<int:id>/', ModificaTipoPago,name='ModificaTipoPago'), # FUNCIONA
     path('modificar/Estado/<int:id>/', ModificaEstado,name='ModificaEstado'), # FUNCIONA
-    path('modificar/Compra_Estado/<int:id>/', ModificaCompraEstado,name='ModificaCompraEstado'),  # FUNCIONA
     path('modificar/CompraDetalle/<int:id>/', ModificaCompraDetalle,name='ModificaCompraDetalle'), # FUNCIONA
     path('modificar/Compra/<int:id>/', ModificaCompra,name='ModificaCompra'), # FUNCIONA
     path('modificar/Estrategia/<int:id>/', ModificaEstrategia,name='ModificaEstrategia'), # FUNCIONA

@@ -72,18 +72,11 @@
                     <div class="px-md-0 px-1" id="footer-font">
                         <b class="pl-md-4">SubTotal =<span class="pl-md-4">${{total_carrito}}</span></b>
                     </div>
-                    <div>
-                        <a href="">
-                            <p>{{ url }}</p>
-                            <p>{{ token }}</p>
-                            <button onclick={PostApi} class="btn btn-sm bg-dark text-white px-lg-5 px-3">Continuar</button>
-                        </a>
-                    </div>
                     <br>
                     {% csrf_token %}
                     <form action="{{ url }}" method="POST" {% csrf_token %}>
                         <input type="hidden" name="token_ws" value="{{ token }}">
-                        <input type="submit" value="Ejecutar Pago con Webpay">
+                        <input type="submit"  class="btn btn-sm bg-dark text-white px-lg-5 px-3" value="Ejecutar Pago con Webpay">
                         </form>
                     <br>
                 </div>

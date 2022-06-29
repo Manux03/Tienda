@@ -1,14 +1,28 @@
 from urllib import response
 from django.shortcuts import render, redirect
+
+from core.context_processor import total_carrito
 from .models import Producto, SubFamilia
 from core.Carrito import Carrito
 from django.views.decorators.csrf import csrf_protect
-import requests
 import random
-
-from flask import render_template, request
 from transbank.error.transbank_error import TransbankError
 from transbank.webpay.webpay_plus.transaction import Transaction
+
+
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.generic.edit import FormView
+from django.contrib.auth import login,logout, authenticate
+from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView, CreateView
+
+from django.views.generic.edit import FormView #user
+from .forms import FormularioLogin, FormularioUsuario, FormularioModifica
+from .models import Usuario
+
+
 
 # Create your views here.
 def home(request):
@@ -16,7 +30,22 @@ def home(request):
 
 @csrf_protect
 def carrito (request):
-    return render(request, 'core/shopcart.html')
+    print("Webpay Plus Transaction.create")
+    total = total_carrito(request)
+    buy_order = str(random.randrange(1000000, 99999999))
+    session_id = str(random.randrange(1000000, 99999999))
+    amount = total['total_carrito']
+    return_url = 'http://127.0.0.1:8000/homex/'
+
+    response = (Transaction()).create(buy_order, session_id, amount, return_url)
+
+    print(response)
+    url=response['url']
+    token=response['token']
+    contexto= {'url':url,'token':token}
+    print(contexto)
+    
+    return render(request,'core/shopcart.html',contexto)
 
 def homex(request):
     return render(request, 'core/homex.html')
@@ -34,7 +63,7 @@ def ProductoDetalle (request, id):
     return render (request,'core/detalleProducto.html', contexto)
 
 def Login(request):
-    return render(request, 'core/Login.html')
+    return render(request, 'core/login2.html')
 
 def agregar_producto(request, id):
     carrito = Carrito(request)
@@ -59,38 +88,84 @@ def limpiar_carrito(request):
     carrito.limpiar()
     return redirect("Carrito")
 
+#usersssssssss
 
-""" def API_TBK_POST(request):
-    url = 'http://rswebpaytransaction/api/webpay/v1.2/transactions'
-    response = requests.post(url, data = {
-                                        "buy_order": "ordenCompra12345678",
-                                        "session_id": "sesion1234557545",
-                                        "amount": 10000,
-                                        "return_url": "http://www.comercio.cl/webpay/retorno"
-                                        })
-    print(response.json) """
+class Login(FormView):
+    template_name = 'core/login2.html'
+    form_class = FormularioLogin
+    success_url = reverse_lazy('homex')
 
-def webpay_plus_create(request):
-    print("Webpay Plus Transaction.create")
-    buy_order = str(random.randrange(1000000, 99999999))
-    session_id = str(random.randrange(1000000, 99999999))
-    amount = random.randrange(10000, 1000000)
-    return_url = 'http://127.0.0.1:8000/comprar/'
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(Login,self).dispatch(request,*args,**kwargs)
 
-    create_request = {
-        "buy_order": buy_order,
-        "session_id": session_id,
-        "amount": amount,
-        "return_url": return_url
+    def form_valid(self,form):
+        login(self.request,form.get_user())
+        return super(Login,self).form_valid(form)
+
+def logoutUsuario(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/login/')
+
+class RegistrarUsuario(CreateView):
+    model = Usuario
+    form_class = FormularioUsuario
+    template_name = 'core/registro.html'
+    success_url = reverse_lazy('homex')
+
+def modifica(request, id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = FormularioUsuario()
+        else:
+            usuario = Usuario.objects.get(pk=id)
+            form = FormularioModifica(instance=usuario)
+        return render(request, "core/modifica.html", {'form': form})
+    else:
+        if id == 0:
+            form = FormularioModifica(request.POST)
+        else:
+            usuario = Usuario.objects.get(pk=id)
+            form = FormularioModifica(request.POST,instance= usuario)
+        if form.is_valid():
+            form.save()
+        return redirect('lista')
+
+def eliminar(request,id):
+    usuario = Usuario.objects.get(pk=id)
+    usuario.delete()
+    return redirect('lista')
+
+def registro(request):
+    if request.method == "GET":
+        form = FormularioUsuario()
+        return render (request,"core/registro.html",{'form':form})
+    else:
+        form = FormularioUsuario(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('core/index.html'))
+
+
+
+def lista (request):
+    contexto = {'usuarioslista': Usuario.objects.all()}
+    return render(request, 'core/listausuarios.html',contexto)
+
+
+def listausuarios(request):
+    datos = {
+        'form':FormularioUsuario()
     }
-
-    response = (Transaction()).create(buy_order, session_id, amount, return_url)
-
-    print(response)
-    url=response['url']
-    token=response['token']
-    contexto= {'url':url,'token':token}
-    print(contexto)
+    if request.method == 'POST':
+        formulario = FormularioUsuario(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje'] = "Guardado Correctamente"
+    return render(request,'core/listausuarios', datos)
+ 
     
-    return render(request,'core/shopcart.html',contexto)
-    """ return render_template('core/create.html', request=create_request, response=response) """
