@@ -55,9 +55,9 @@
                                                 {% block content %}
                                                 <form action="" method="post" enctype = 'multipart/form-data'>
                                                     {% csrf_token %}
-                                                    <label>Compra</label>
+                                                    <label>Orden</label>
                                                     <br>
-                                                    {{ form.idcompra | add_class:"form-control"}}
+                                                    {{ form.idOrden | add_class:"form-control"}}
                                                     <br>
                                                     <label>Producto</label>
                                                     <br>

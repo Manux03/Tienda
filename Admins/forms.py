@@ -56,7 +56,7 @@ class EstadoForm(ModelForm):
 class CompraForm(ModelForm):
     class Meta:
         model = Compra
-        fields = ['idCompra','idUsuario','idTipopago', 'idSucursal','idEstado']
+        fields = ['idCompra','idUsuario','idTipopago', 'idSucursal','idEstado','idOrden']
 
 class EstrategiaForm(ModelForm):
     class Meta:
@@ -72,4 +72,4 @@ class EstrategiaDetalleForm(ModelForm):
 class CompraDetalleForm(ModelForm):
     class Meta:
         model = Compra_Detalle
-        fields = ['idCompraDetalle','idcompra', 'idProducto']
+        fields = ['idCompraDetalle','idOrden', 'idProducto']

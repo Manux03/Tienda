@@ -1,6 +1,5 @@
 from urllib import response
 from django.shortcuts import render, redirect
-from core.context_processor import retorno_productos
 from core.context_processor import total_carrito
 from .models import Producto, SubFamilia, Compra
 from core.Carrito import Carrito
@@ -31,7 +30,6 @@ def home(request):
 @csrf_protect
 def carrito (request):
     total1 = total_carrito(request)
-    retorno = retorno_productos(request)
     if request.method == "POST":
         print(22222222222222)
         return render(request,'core/shopcart.html')
@@ -50,7 +48,6 @@ def carrito (request):
         token=response['token']
         contexto= {'url':url,'token':token}
         print(contexto)
-        print(retorno['retorno_productos'])
         return render(request,'core/shopcart.html',contexto)
 
     return render(request,'core/shopcart.html')

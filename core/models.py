@@ -190,5 +190,5 @@ class Compra (models.Model):
 
 class Compra_Detalle (models.Model):
     idCompraDetalle = models.AutoField(primary_key= True, verbose_name ='idCompraDetalle')
-    idcompra = models.ForeignKey (Compra, on_delete= models.CASCADE)
+    idOrden = models.ForeignKey (Compra, on_delete= models.CASCADE)
     idProducto = models.ForeignKey (Producto, on_delete= models.CASCADE)

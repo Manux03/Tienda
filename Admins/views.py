@@ -45,7 +45,7 @@ def TablaEstado(request):
     return render(request, 'tablaEstado.html', contexto)
    
 def TablaCompraDetalle(request):
-    contexto = {'compradetallelista': Compra_Detalle.objects.select_related('idcompra', 'idProducto').all()}
+    contexto = {'compradetallelista': Compra_Detalle.objects.select_related('idOrden', 'idProducto').all()}
     return render(request, 'tablacompraDetalle.html', contexto)
 
 def TablaCompra(request):

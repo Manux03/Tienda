@@ -56,7 +56,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID CompraDetalle</th>
-                                            <th>ID Compra</th>
+                                            <th>ID Orden</th>
                                             <th>ID Producto</th>
                                             <th>Opciones</th>
                                         </tr>
@@ -64,7 +64,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>ID CompraDetalle</th>
-                                            <th>ID Compra</th>
+                                            <th>ID Orden</th>
                                             <th>ID Producto</th>
                                             <th>Opciones</th>
                                         </tr>
@@ -73,7 +73,7 @@
                                         {% for detallecompra in compradetallelista %}
                                         <tr>
                                             <td>{{detallecompra.idCompraDetalle}}</td>
-                                            <td>{{detallecompra.idcompra.idCompra}}</td>
+                                            <td>{{detallecompra.idOrden}}</td>
                                             <td>{{detallecompra.idProducto.idProducto}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
@@ -81,10 +81,6 @@
                                                         <a href="{% url 'ModificaCompraDetalle' detallecompra.idCompraDetalle %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarCompraDetalle' detallecompra.idCompraDetalle %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
                                                     </div>   
                                                 </div>
                                             </td>
