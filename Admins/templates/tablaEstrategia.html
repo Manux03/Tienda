@@ -57,14 +57,16 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre Estrategia</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                        <tr>
                                             <th>ID</th>
                                             <th>Nombre Estrategia</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr> 
                                     </tfoot>
                                     <tbody>
@@ -77,15 +79,16 @@
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
                                                         <a href="{% url 'ModificaEstrategia' estrategia.idEstrategia %}">
-                                                            <div class="btn btn-success">Modificar</div>
+                                                            <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarEstrategia' estrategia.idEstrategia %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
-                                                    </div>
-                                                    
+                                                    </div>   
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'EliminarEstrategia' estrategia.idEstrategia %}" method="post">
+                                                    {% csrf_token %}
+                                                        <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         {% endfor %}

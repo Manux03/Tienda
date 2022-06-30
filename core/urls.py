@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Tienda, agregar_producto, carrito, create, eliminar_producto, home, homex, ProductoDetalle, login, limpiar_carrito, restar_producto
+from .views import Tienda, agregar_producto, carrito, create, eliminar_producto, home, homex, ProductoDetalle, login, limpiar_carrito, restar_producto, webpay_plus_commit
 from .views import Login, logoutUsuario,RegistrarUsuario, lista, modifica,eliminar #user
 from django.contrib.auth.decorators import login_required #user
 from django.conf import settings #user
@@ -19,4 +19,5 @@ urlpatterns = [
     path('create/', create, name="create"),
     path('logout/',login_required(logoutUsuario),name = 'logout'),
     path('registrar_usuario/',RegistrarUsuario.as_view(),name = 'registro'),
+    path('Pago/',webpay_plus_commit,name = 'pago')
 ]

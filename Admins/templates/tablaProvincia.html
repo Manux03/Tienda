@@ -58,7 +58,8 @@
                                             <th>ID</th>
                                             <th>Nombre Provincia</th>
                                             <th>Region</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -66,7 +67,8 @@
                                             <th>ID</th>
                                             <th>Nombre Provincia</th>
                                             <th>Region</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr> 
                                     </tfoot>
                                     <tbody>
@@ -75,20 +77,20 @@
                                             <td>{{provincia.idProvincia}}</td>
                                             <td>{{provincia.nombre_provincia}}</td>
                                             <td>{{provincia.region_idRegion.nombre_region}}</td>
-
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
                                                         <a href="{% url 'ModificaProvincia' provincia.idProvincia %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarProvincia' provincia.idProvincia %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
-                                                    </div>
-                                                    
+                                                    </div>   
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'EliminarProvincia' provincia.idProvincia %}" method="post">
+                                                    {% csrf_token %}
+                                                        <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         {% endfor %}

@@ -13,3 +13,11 @@ def total_productos(request):
             for key, value in request.session["carrito"].items():
                 suma += int(value["cantidad"])
     return {"total_productos": suma}
+
+def retorno_productos(request):
+    suma = 0
+    if request:
+        if "carrito" in request.session.keys():
+            for key, value in request.session["carrito"].items():
+                suma += int(value["cantidad"])
+    return {"retorno_productos": suma}

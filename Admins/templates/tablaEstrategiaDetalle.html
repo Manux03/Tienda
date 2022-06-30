@@ -72,24 +72,19 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for Compra_Estado in Compra_Estadolista %}
+                                        {% for estrategiadetalle in EstrategiaDetallelista %}
                                         <tr>
-                                            <td>{{Estrategia_Detalle.idEstrategiaDetalle}}</td>
-                                            <td>{{Estrategia_Detalle.idEstrategia}}</td>
-                                            <td>{{Estrategia_Detalle.idSucursal}}</td>
-                                            <td>{{Estrategia_Detalle.descripcion}}</td>
+                                            <td>{{estrategiadetalle.idEstrategiaDetalle}}</td>
+                                            <td>{{estrategiadetalle.idEstrategia}}</td>
+                                            <td>{{estrategiadetalle.idSucursal}}</td>
+                                            <td>{{estrategiadetalle.descripcion}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
                                                         <a href="{% url 'ModificaEstrategiaDetalle' estrategiadetalle.idEstrategiaDetalle %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarEstrategiaDetalle' estrategiadetalle.idEstrategiaDetalle %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
-                                                    </div>
-                                                    
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>

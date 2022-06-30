@@ -57,14 +57,16 @@
                                         <tr>
                                             <th>ID Familia</th>
                                             <th>Familia Producto</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID Familia</th>
                                             <th>Familia Producto</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -78,13 +80,14 @@
                                                         <a href="{% url 'ModificarFamilia' familia.idFamilia %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarFamilia' familia.idFamilia %}" method="post">
-                                                        {% csrf_token %}
-                                                            <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                    </form>
-                                                    </div>
-                                                    
+                                                    </div>   
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'EliminarFamilia' familia.idFamilia %}" method="post">
+                                                    {% csrf_token %}
+                                                        <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         {% endfor %}

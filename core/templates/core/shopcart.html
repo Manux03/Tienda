@@ -73,12 +73,14 @@
                         <b class="pl-md-4">SubTotal =<span class="pl-md-4">${{total_carrito}}</span></b>
                     </div>
                     <br>
+                    {% if request.session.carrito.items %}
                     {% csrf_token %}
                     <form action="{{ url }}" method="POST" {% csrf_token %}>
                         <input type="hidden" name="token_ws" value="{{ token }}">
                         <input type="submit"  class="btn btn-sm bg-dark text-white px-lg-5 px-3" value="Ejecutar Pago con Webpay">
                         </form>
                     <br>
+                    {% endif %}
                 </div>
             </div>
         </div>

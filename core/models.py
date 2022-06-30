@@ -1,5 +1,6 @@
 from pyexpat import model
 from django.db import models
+from django.utils.timezone import now
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Group
 # Create your models here.
 
@@ -155,7 +156,7 @@ class Estrategia (models.Model):
 
 class Estrategia_Detalle (models.Model):
     idEstrategiaDetalle = models.AutoField(primary_key= True, verbose_name ='idEstrategiaDetalle')
-    idEstrategia = models.ForeignKey(Producto, on_delete= models.CASCADE)
+    idEstrategia = models.ForeignKey(Estrategia, on_delete= models.CASCADE)
     idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
     descripcion = models.CharField (max_length= 1000,verbose_name='descripcion')
 
@@ -176,13 +177,16 @@ class Estado(models.Model):
 
 
 class Compra (models.Model):
-    idCompra = models.AutoField(primary_key= True, verbose_name ='idCompra')
-    fechaCompra = models.DateField(verbose_name='Fechadecompra')
+    idCompra =  models.AutoField(primary_key= True, verbose_name ='idCompra')
+    idOrden= models.IntegerField (verbose_name ='orden')
+    fechaCompra = models.DateField(default=now,verbose_name='Fechadecompra')
     idTipopago = models.ForeignKey (Tipopago, on_delete= models.CASCADE)
     idUsuario = models.ForeignKey (Usuario, on_delete= models.CASCADE)
-    idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
     idEstado = models.ForeignKey (Estado, on_delete= models.CASCADE)
+    idSucursal = models.ForeignKey (Sucursal, on_delete= models.CASCADE)
 
+    def __str__(self):
+        return '%s' % (self.idCompra)
 
 class Compra_Detalle (models.Model):
     idCompraDetalle = models.AutoField(primary_key= True, verbose_name ='idCompraDetalle')

@@ -61,7 +61,8 @@
                                             <th>ID Usuario</th>
                                             <th>Sucursal</th>
                                             <th>ID Estado</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -72,7 +73,8 @@
                                             <th>ID Usuario</th>
                                             <th>Sucursal</th>
                                             <th>ID Estado</th>
-                                            <th>Opciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -83,20 +85,22 @@
                                             <td>{{compra.idTipopago.tipopago}}</td>
                                             <td>{{compra.idUsuario.idUsuario}}</td>
                                             <td>{{compra.idSucursal.sucursal}}</td>
-                                            <td>{{compra.idEstado.Estado}}</td>
+                                            <td>{{compra.idEstado.estado}}</td>
                                             <td>                                
                                                 <div class="col-md-2">
                                                     <div class="col-md-3">
                                                         <a href="{% url 'ModificaCompra' compra.idCompra %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                        <form action="{% url 'EliminarCompra' compra.idCompra %}" method="post">
-                                                            {% csrf_token %}
-                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
-                                                        </form>
-                                                    </div>
-                                                    
+                                                        
+                                                    </div>   
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'EliminarCompra' compra.idCompra %}" method="post">
+                                                    {% csrf_token %}
+                                                        <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         {% endfor %}

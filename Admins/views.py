@@ -420,7 +420,7 @@ def ModificaEstrategiaDetalle(request,id=0):
             form = EstrategiaDetalleForm(request.POST or None,request.FILES or None, instance = producto)
         if form.is_valid():
             form.save()
-        return redirect('tablasEstrategiaDetalle')
+        return redirect('TablaEstrategiaDetalle')
 
 
 

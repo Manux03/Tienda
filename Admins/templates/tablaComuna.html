@@ -59,7 +59,7 @@
                                             <th>Nombre Comuna</th>
                                             <th>Provincia</th>
                                             <th>Editar</th>
-                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -68,7 +68,7 @@
                                             <th>Nombre Comuna</th>
                                             <th>Provincia</th>
                                             <th>Editar</th>
-                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -83,13 +83,13 @@
                                                         <a href="{% url 'ModificaComuna' comuna.idComuna %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                    </div>                                                   
+                                                    </div>   
                                                 </div>
                                             </td>
-                                            <td>           
+                                            <td>
                                                 <form action="{% url 'EliminarComuna' comuna.idComuna %}" method="post">
-                                                {% csrf_token %}
-                                                    <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                    {% csrf_token %}
+                                                        <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

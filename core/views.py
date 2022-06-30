@@ -1,8 +1,8 @@
 from urllib import response
 from django.shortcuts import render, redirect
-
+from core.context_processor import retorno_productos
 from core.context_processor import total_carrito
-from .models import Producto, SubFamilia
+from .models import Producto, SubFamilia, Compra
 from core.Carrito import Carrito
 from django.views.decorators.csrf import csrf_protect
 import random
@@ -30,22 +30,42 @@ def home(request):
 
 @csrf_protect
 def carrito (request):
-    print("Webpay Plus Transaction.create")
-    total = total_carrito(request)
-    buy_order = str(random.randrange(1000000, 99999999))
-    session_id = str(random.randrange(1000000, 99999999))
-    amount = total['total_carrito']
-    return_url = 'http://127.0.0.1:8000/homex/'
+    total1 = total_carrito(request)
+    retorno = retorno_productos(request)
+    if request.method == "POST":
+        print(22222222222222)
+        return render(request,'core/shopcart.html')
+    if total1['total_carrito'] > 0:
+        print("Webpay Plus Transaction.create")
+        buy_order = str(random.randrange(1000000, 99999999))
+        session_id = str(random.randrange(1000000, 99999999))
+        total = total_carrito(request)
+        amount = total['total_carrito']
+        return_url = 'http://127.0.0.1:8000/Pago/'
 
-    response = (Transaction()).create(buy_order, session_id, amount, return_url)
+        response = (Transaction()).create(buy_order, session_id, amount, return_url)
 
-    print(response)
-    url=response['url']
-    token=response['token']
-    contexto= {'url':url,'token':token}
-    print(contexto)
-    
-    return render(request,'core/shopcart.html',contexto)
+        print(response)
+        url=response['url']
+        token=response['token']
+        contexto= {'url':url,'token':token}
+        print(contexto)
+        print(retorno['retorno_productos'])
+        return render(request,'core/shopcart.html',contexto)
+
+    return render(request,'core/shopcart.html')
+
+def webpay_plus_commit(request):
+    token = request.GET.get("token_ws")
+    print("commit for token_ws: {}".format(token))
+
+    response = (Transaction()).commit(token=token)
+    print("response: {}".format(response))
+    idOrden = response['buy_order']
+    idUsuario = request.user.idUsuario
+    idEstadoCompra = 1
+    Compra.objects.create(idOrden = idOrden, idTipopago_id = 1, idUsuario_id = idUsuario, idEstado_id = idEstadoCompra, idSucursal_id = 1 )
+    return render(request,'core/shopcart.html')
 
 def homex(request):
     return render(request, 'core/homex.html')
@@ -80,6 +100,7 @@ def eliminar_producto(request, id):
 def restar_producto(request,id):
     carrito = Carrito(request)
     producto = Producto.objects.get(idProducto=id)
+    print (carrito)
     carrito.restar(producto)
     return redirect("Carrito")
 

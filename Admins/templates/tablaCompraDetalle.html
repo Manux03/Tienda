@@ -81,7 +81,11 @@
                                                         <a href="{% url 'ModificaCompraDetalle' detallecompra.idCompraDetalle %}">
                                                             <div class="btn btn-success">Editar</div>
                                                         </a>
-                                                    </div> 
+                                                        <form action="{% url 'EliminarCompraDetalle' detallecompra.idCompraDetalle %}" method="post">
+                                                            {% csrf_token %}
+                                                                <button type = "submit" class=" col-12 btn btn-danger fcc-btn">Eliminar</button>
+                                                        </form>
+                                                    </div>   
                                                 </div>
                                             </td>
                                         </tr>
